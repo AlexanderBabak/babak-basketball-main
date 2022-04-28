@@ -42,14 +42,14 @@ const InputWrapper = styled.div`
   padding: 0 12px;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
 
   &:hover {
     background: ${({ theme }) => theme.colors.lightestGrey};
     transition: all 0.2s ease-in-out;
   }
 
-  &:focus {
-    outline: none;
+  &:focus-within {
     box-shadow: 0px 0px 5px #d9d9d9;
   }
 
@@ -70,7 +70,7 @@ const InputWrapper = styled.div`
 const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 12px 0;
+  margin-bottom: 24px;
   /* position: relative; */
 
   & > label {
@@ -82,10 +82,14 @@ const InputContainer = styled.div`
   }
 `;
 const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
   z-index: 1;
+  cursor: pointer;
 `;
 
 const Input = styled.input`
+  width: 100%;
   background: transparent;
   border: none;
 
