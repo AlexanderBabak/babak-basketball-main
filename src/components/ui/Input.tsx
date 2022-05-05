@@ -1,21 +1,25 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import styled from "styled-components";
+import { UseFormMethods } from "react-hook-form";
 
-interface propsInput {
+interface InputProps
+  extends Partial<Pick<UseFormMethods, "register" | "errors">> {
+  name: string;
+  label: string;
+  type: "text" | "password";
   placeholder: string;
   value?: string;
-  type: string;
   disabled?: boolean;
-  error?: boolean;
-  label?: string;
-  icon?: ReactNode;
+  icon?: string;
   onClickIcon?: () => void;
 }
 
-export const FormInput: FC<propsInput> = ({
+export const FormInput: FC<InputProps> = ({
   value,
   type,
   label,
+  name,
+  register,
   placeholder,
   icon,
   onClickIcon,
@@ -24,8 +28,18 @@ export const FormInput: FC<propsInput> = ({
     <InputContainer>
       {label && <label>{label}</label>}
       <InputWrapper>
-        <Input placeholder={placeholder} type={type} value={value} />
-        {icon && <IconWrapper onClick={onClickIcon}>{icon}</IconWrapper>}
+        <Input
+          ref={register}
+          placeholder={placeholder}
+          type={type}
+          value={value}
+          name={name}
+        />
+        {icon && (
+          <IconWrapper onClick={onClickIcon}>
+            <img src={icon} alt="visibility" />
+          </IconWrapper>
+        )}
       </InputWrapper>
     </InputContainer>
   );
