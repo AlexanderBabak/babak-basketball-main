@@ -1,38 +1,38 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { UseFormMethods } from "react-hook-form";
+import { FieldError, RegisterOptions, UseFormMethods } from "react-hook-form";
 
 interface InputProps
   extends Partial<Pick<UseFormMethods, "register" | "errors">> {
   name: string;
   label: string;
   type: "text" | "password";
-  placeholder: string;
+  registerOptions?: RegisterOptions;
   value?: string;
   disabled?: boolean;
   icon?: string;
   onClickIcon?: () => void;
+  error?: FieldError;
 }
 
-export const FormInput: FC<InputProps> = ({
-  value,
+export const InputFormAuth: FC<InputProps> = ({
+  registerOptions,
   type,
   label,
   name,
   register,
-  placeholder,
   icon,
   onClickIcon,
-}) => {
+  error,
+}): JSX.Element => {
   return (
     <InputContainer>
       {label && <label>{label}</label>}
-      <InputWrapper>
+      <InputWrapper error={!!error}>
         <Input
-          ref={register}
-          placeholder={placeholder}
+          ref={register && register(registerOptions)}
           type={type}
-          value={value}
+          id={name}
           name={name}
         />
         {icon && (
@@ -41,11 +41,16 @@ export const FormInput: FC<InputProps> = ({
           </IconWrapper>
         )}
       </InputWrapper>
+      {error && (
+        <ErrorMessage style={{ color: "#FF768E" }}>
+          {error.message}
+        </ErrorMessage>
+      )}
     </InputContainer>
   );
 };
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ error: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,7 +59,7 @@ const InputWrapper = styled.div`
   height: 40px;
   width: 100%;
   padding: 0 12px;
-  border: none;
+  border: ${({ error }) => (error ? "1px solid #FF768E" : "none")};
   border-radius: 4px;
   cursor: pointer;
 
@@ -75,9 +80,6 @@ const InputWrapper = styled.div`
     &:hover {
       background: ${({ theme }) => theme.colors.lightestGrey1};
     }
-  }
-
-  &error {
   }
 `;
 
@@ -110,4 +112,10 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+`;
+
+const ErrorMessage = styled.p`
+  color: ${({ theme }) => theme.colors.lightRed};
+  font-size: 12px;
+  line-height: 18px;
 `;
