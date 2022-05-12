@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { LayoutAuth } from "../../../../../components/layouts/LayoutAuth";
+import { AuthLayout } from "../../../../../components/layouts/AuthLayout";
 import { Button } from "../../../../../components/ui/Button";
 import { InputFormAuth } from "../../../../../components/ui/InputFormAuth";
 import { AuthNavigation } from "../../../../../components/navigation/AuthNavigation";
@@ -29,7 +29,7 @@ export const RegistrationForm: FC<FormProps> = ({
   watchFields,
 }): JSX.Element => {
   return (
-    <LayoutAuth titleText="Sign Up" img={layer2}>
+    <AuthLayout titleText="Sign Up" img={layer2}>
       <Form onSubmit={onSubmit}>
         <InputFormAuth
           type="text"
@@ -97,7 +97,7 @@ export const RegistrationForm: FC<FormProps> = ({
         <Button>Sign Up</Button>
       </Form>
       <AuthNavigation text="Not a member yet?" actionText="Sign In" path="/" />
-    </LayoutAuth>
+    </AuthLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled from "styled-components";
-import { LayoutAuth } from "../../../../../components/layouts/LayoutAuth";
+import { AuthLayout } from "../../../../../components/layouts/AuthLayout";
 import { Button } from "../../../../../components/ui/Button";
 import { InputFormAuth } from "../../../../../components/ui/InputFormAuth";
 import { AuthNavigation } from "../../../../../components/navigation/AuthNavigation";
@@ -26,7 +26,7 @@ export const LoginForm: FC<FormProps> = ({
   errors,
 }) => {
   return (
-    <LayoutAuth titleText="Sign In" img={layer1}>
+    <AuthLayout titleText="Sign In" img={layer1}>
       <Form onSubmit={onSubmit}>
         <InputFormAuth
           type="text"
@@ -66,7 +66,7 @@ export const LoginForm: FC<FormProps> = ({
         actionText="Sign Up"
         path="/registration"
       />
-    </LayoutAuth>
+    </AuthLayout>
   );
 };
 
