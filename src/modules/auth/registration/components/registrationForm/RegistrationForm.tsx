@@ -8,7 +8,7 @@ import iconVis from "../../../../../assets/images/icon/visibility_24px.png";
 import iconVisOff from "../../../../../assets/images/icon/visibility_off_24px.svg";
 import layer2 from "../../../../../assets/images/icon/Layer 2.png";
 import { FieldErrors, UseFormMethods } from "react-hook-form";
-import { FormFields } from "../../RegistrationPage";
+import { RegisterValues } from "../../RegistrationPage";
 import { CheckBox } from "../checkBox/CheckBox";
 
 interface FormProps
@@ -16,8 +16,8 @@ interface FormProps
   onShowPassword: () => void;
   showPassword: boolean;
   onSubmit: () => void;
-  errors: FieldErrors<FormFields>;
-  watchFields: Partial<FormFields>;
+  errors: FieldErrors<RegisterValues>;
+  watchFields: Partial<RegisterValues>;
 }
 
 export const RegistrationForm: FC<FormProps> = ({
@@ -34,8 +34,8 @@ export const RegistrationForm: FC<FormProps> = ({
         <InputFormAuth
           type="text"
           label="Name"
-          name="name"
-          error={errors.name}
+          name="userName"
+          error={errors.userName}
           register={register}
           registerOptions={{
             required: "Name is required.",

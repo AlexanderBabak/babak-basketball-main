@@ -113,7 +113,6 @@ const Input = styled.input`
     outline: none;
   }
 `;
-
 const ErrorMessage = styled.p`
   color: ${({ theme }) => theme.colors.lightRed};
   font-size: 12px;

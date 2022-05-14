@@ -80,7 +80,7 @@ const Icon = styled.svg`
 const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
   border: 0;
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
+  clippath: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -101,9 +101,11 @@ const StyledCheckbox = styled.div<{ checked?: boolean; error?: boolean }>`
   border: ${({ error }) => (error ? "1px solid #E4163A" : "1px solid #9c9c9c")};
   border-radius: 2px;
   transition: all 150ms;
+
   &:hover {
     border: 1px solid #e4163a;
   }
+
   ${Icon} {
     visibility: ${({ checked }) => (checked ? "visible" : "hidden")};
   }

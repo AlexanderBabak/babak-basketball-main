@@ -8,14 +8,14 @@ import iconVis from "../../../../../assets/images/icon/visibility_24px.png";
 import iconVisOff from "../../../../../assets/images/icon/visibility_off_24px.svg";
 import layer1 from "../../../../../assets/images/icon/Layer 1.png";
 import { FieldErrors, UseFormMethods } from "react-hook-form";
-import { FormFields } from "../../LoginPage";
+import { LoginParams } from "../../../../../api/auth/AuthDto";
 
 interface FormProps
   extends Partial<Pick<UseFormMethods, "register" | "errors">> {
   onClickIcon?: () => void;
   showPassword: boolean;
   onSubmit: () => void;
-  errors: FieldErrors<FormFields>;
+  errors: FieldErrors<LoginParams>;
 }
 
 export const LoginForm: FC<FormProps> = ({
@@ -35,7 +35,7 @@ export const LoginForm: FC<FormProps> = ({
           register={register}
           error={errors.login}
           registerOptions={{
-            required: "Login is required",
+            required: "Login is required.",
             pattern: {
               value: /^[a-z0-9_-]{3,16}$/,
               message: "Invalid login.",
