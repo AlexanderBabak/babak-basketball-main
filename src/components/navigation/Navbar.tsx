@@ -9,7 +9,6 @@ export const Navbar: FC = () => {
   const handleClick = () => setClick(!click);
 
   return (
-    // <Nav>
     <NavbarContainer>
       <NavLogo to="/">
         <img src={Logo} alt="logo" />
@@ -17,36 +16,19 @@ export const Navbar: FC = () => {
       <MobileIcon onClick={handleClick}>
         {click ? <FaTimes /> : <FaBars />}
       </MobileIcon>
-      {/* <UserAccount>
-          <UserName>John Smith</UserName>
-          <UserImg />
-        </UserAccount> */}
     </NavbarContainer>
-    // </Nav>
   );
 };
-
-// const Nav = styled.nav`
-//   background: green;
-//   height: 62px;
-//   /* display: flex;
-//   justify-content: center;
-//   align-items: center; */
-//   position: sticky;
-//   top: 0;
-//   z-index: 999;
-// `;
 
 const NavbarContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  background: red;
+  background: #000;
   height: 62px;
 
   @media screen and (min-width: 960px) {
-    max-width: 1440px;
     width: 100%;
     margin: 0 auto;
     padding-left: 50px;

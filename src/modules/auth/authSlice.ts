@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import { RootState } from "../../redux/rootReducer";
 import { signInAction, signUpAction } from "./authActions";
+import { RootState } from "../../redux/store";
 
 interface AuthState {
   loading: "idle" | "pending";
-  user: any;
+  user: null | {};
   error: string | undefined;
 }
 
@@ -27,8 +27,9 @@ export const authSlice = createSlice({
     builder.addCase(signUpAction.pending, (state) => {
       state.loading = "pending";
     });
-    builder.addCase(signUpAction.fulfilled, (state) => {
+    builder.addCase(signUpAction.fulfilled, (state, { payload }) => {
       state.loading = "idle";
+      state.user = payload;
       state.error = undefined;
     });
     builder.addCase(signUpAction.rejected, (state, { payload }) => {
@@ -51,7 +52,6 @@ export const authSlice = createSlice({
 });
 
 export const { logout } = authSlice.actions;
-
-// export const selectAuth = (state: RootState) => state;
+export const authSelector = (state: RootState) => state.auth;
 
 export default authSlice.reducer;
