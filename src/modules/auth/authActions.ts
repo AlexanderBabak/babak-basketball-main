@@ -19,7 +19,7 @@ export const signUpAction = createAsyncThunk<
 
     try {
       const registerData = await authServices.register(registerParams);
-      localStorage.setItem("token", JSON.stringify(registerData.token));
+      localStorage.setItem("user", JSON.stringify(registerData));
       callback && callback();
       return registerData;
     } catch (err) {
@@ -47,8 +47,7 @@ export const signInAction = createAsyncThunk<
     const { rejectWithValue } = thunkAPI;
     try {
       const loginData = await authServices.login(loginParams);
-      localStorage.setItem("token", JSON.stringify(loginData.token));
-      callback && callback();
+      localStorage.setItem("user", JSON.stringify(loginData));
       return loginData;
     } catch (err) {
       if (err instanceof CustomError) {

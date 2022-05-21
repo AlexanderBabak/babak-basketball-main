@@ -1,17 +1,22 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { LoginForm } from "./components/loginForm/LoginForm";
+import { LoginForm } from "./components/LoginForm";
 import { useAppDispatch } from "../../../redux/store";
 import { signInAction } from "../authActions";
 import { LoginParams } from "../../../api/auth/AuthDto";
 import { useHistory } from "react-router-dom";
-
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import { authSelector } from "../authSlice";
 
 export const LoginPage: FC = () => {
   const dispatch = useAppDispatch();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const history = useHistory();
+  const { user } = useSelector(authSelector);
+  const { push } = useHistory();
+
+  useEffect(() => {
+    user && push("/");
+  }, [user, push]);
 
   const { register, handleSubmit, errors } = useForm<LoginParams>({
     mode: "onBlur",
@@ -25,9 +30,9 @@ export const LoginPage: FC = () => {
     dispatch(
       signInAction({
         loginParams: loginValues,
-        callback: () => {
-          history.push("/");
-        },
+        // callback: () => {
+        //   history.push("/");
+        // },
       })
     );
   });
