@@ -6,21 +6,21 @@ import { CustomError } from "../../core/helpers/errorHelper";
 
 export const signUpAction = createAsyncThunk<
   any,
-  {
-    registerParams: RegisterParams;
-    callback?: () => void;
-  },
+  RegisterParams,
   { rejectValue: string }
 >(
   "auth/signUp",
 
-  async ({ registerParams, callback }, thunkAPI) => {
+  async ({ userName, login, password }, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
 
     try {
-      const registerData = await authServices.register(registerParams);
+      const registerData = await authServices.register({
+        userName,
+        login,
+        password,
+      });
       localStorage.setItem("user", JSON.stringify(registerData));
-      callback && callback();
       return registerData;
     } catch (err) {
       if (err instanceof CustomError) {
@@ -35,20 +35,18 @@ export const signUpAction = createAsyncThunk<
 
 export const signInAction = createAsyncThunk<
   any,
-  {
-    loginParams: LoginParams;
-    callback?: () => void;
-  },
+  LoginParams,
   { rejectValue: string }
 >(
   "auth/signIn",
 
-  async ({ loginParams, callback }, thunkAPI) => {
+  async (loginParams, thunkAPI) => {
     const { rejectWithValue } = thunkAPI;
     try {
       const loginData = await authServices.login(loginParams);
       localStorage.setItem("user", JSON.stringify(loginData));
       return loginData;
+      // callback && callback();
     } catch (err) {
       if (err instanceof CustomError) {
         notification("error", err.text);

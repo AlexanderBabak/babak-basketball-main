@@ -7,6 +7,7 @@ import { RegisterParams } from "../../../api/auth/AuthDto";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { authSelector } from "../authSlice";
+import { pathList } from "../../../routers/pathList";
 
 export interface RegisterValues extends RegisterParams {
   password_repeat: string;
@@ -17,16 +18,14 @@ export const RegistrationPage: FC = () => {
   const dispatch = useAppDispatch();
   const { push } = useHistory();
   const { user } = useSelector(authSelector);
-
   const [showPassword, setShowPassword] = useState<boolean>(false);
-
-  useEffect(() => {
-    user && push("/");
-  }, [user, push]);
-
   const { register, handleSubmit, errors, watch } = useForm<RegisterValues>({
     mode: "onBlur",
   });
+
+  useEffect(() => {
+    user && push(pathList.content.teams);
+  }, [user, push]);
 
   const watchFields = watch(["password", "terms"]);
 
@@ -36,14 +35,8 @@ export const RegistrationPage: FC = () => {
 
   const handleFormSubmit = handleSubmit(async (registerValues) => {
     const { userName, login, password } = registerValues;
-    dispatch(
-      signUpAction({
-        registerParams: { userName, login, password },
-        // callback: () => {
-        //   history.push("/");
-        // },
-      })
-    );
+
+    dispatch(signUpAction({ userName, login, password }));
   });
 
   return (
