@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import Select, { StylesConfig } from "react-select";
 import { Controller } from "react-hook-form";
 import { Control, FieldValues } from "react-hook-form";
@@ -9,6 +9,18 @@ export interface SelectProps<TFieldValues extends FieldValues = FieldValues> {
   nameSelect: string;
   isMulti?: boolean;
 }
+//
+// const options = [
+//   { value: "portland trail blazers", label: "Portland trail blazers" },
+//   { value: "minnesota timberwolves", label: "Minnesota timberwolves" },
+//   { value: "oklahoma city thunder", label: "Oklahoma city thunder" },
+//   { value: "memphis Grizzlies", label: "Memphis Grizzlies" },
+//   { value: "denver Nuggets", label: "Denver Nuggets" },
+//   {
+//     value: "philadelphia seventy sixers",
+//     label: "Philadelphia seventy sixers",
+//   },
+// ];
 
 const customStyles: StylesConfig<{ value: string; label: string }, boolean> = {
   singleValue: (prov, state) => ({
@@ -16,7 +28,6 @@ const customStyles: StylesConfig<{ value: string; label: string }, boolean> = {
     color: "#9C9C9C",
     fontSize: "18px",
   }),
-
   option: (provided, state) => ({
     ...provided,
     color: state.isSelected || state.isFocused ? "#ffffff" : "#9C9C9C",
@@ -24,10 +35,10 @@ const customStyles: StylesConfig<{ value: string; label: string }, boolean> = {
     borderBottom: "0.5px solid #D1D1D1 ",
     fontSize: "18px",
   }),
-
   menu: (provided, state) => ({
     ...provided,
     width: "88px",
+    height: "40px",
     borderRadius: "4px",
   }),
   control: (provided, state) => ({
@@ -41,7 +52,6 @@ const customStyles: StylesConfig<{ value: string; label: string }, boolean> = {
     borderRadius: "4px",
   }),
 };
-
 const options = [
   { value: "6", label: "6" },
   { value: "12", label: "12" },

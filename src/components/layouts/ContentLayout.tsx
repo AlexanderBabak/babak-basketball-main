@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FC } from "react";
 import { ContentHeader } from "../ContentHeader";
-import { ContentFooter } from "../ContentFooter";
 import { PropsInputSearch } from "../ui/InputSearch";
+import { ContentFooter } from "../ContentFooter";
 import { SelectProps } from "../ui/CustomSelect";
 
 interface Props extends PropsInputSearch, SelectProps {
@@ -17,19 +17,20 @@ export const ContentLayout: FC<Props> = ({
   nameSelect,
   control,
   children,
-}) => (
-  <CardsSection>
-    <ContentHeader
-      register={register}
-      placeholder={placeholder}
-      nameSearch={nameSearch}
-      onSubmit={onSubmit}
-    />
-    <CardsContainer>{children}</CardsContainer>
-    <ContentFooter nameSelect={nameSelect} control={control} />
-  </CardsSection>
-);
-
+}) => {
+  return (
+    <CardsSection>
+      <ContentHeader
+        register={register}
+        placeholder={placeholder}
+        nameSearch={nameSearch}
+        onSubmit={onSubmit}
+      />
+      <CardsContainer>{children}</CardsContainer>
+      <ContentFooter nameSelect={nameSelect} control={control} />
+    </CardsSection>
+  );
+};
 const CardsSection = styled.section`
   display: flex;
   flex-direction: column;
@@ -40,7 +41,8 @@ const CardsContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
-  margin: 32px 0;
+  margin: 16px 0;
+  overflow-y: auto;
   max-height: 752px;
   height: 100%;
 

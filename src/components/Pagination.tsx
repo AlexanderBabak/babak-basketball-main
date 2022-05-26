@@ -5,24 +5,20 @@ type Props = Pick<
   ReactPaginateProps,
   "pageCount" | "onPageChange" | "initialPage"
 >;
-
-export const Pagination = (props: Props) => {
-  return (
-    <PaginationWrapper>
-      <ReactPaginate
-        previousLabel={"<"}
-        nextLabel={">"}
-        breakLabel={"..."}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={2}
-        containerClassName={"pagination"}
-        pageLinkClassName={"page-link"}
-        {...props}
-      />
-    </PaginationWrapper>
-  );
-};
-
+export const Pagination = (props: Props) => (
+  <PaginationWrapper>
+    <ReactPaginate
+      previousLabel={"<"}
+      nextLabel={">"}
+      breakLabel={"..."}
+      marginPagesDisplayed={2}
+      pageRangeDisplayed={2}
+      containerClassName={"pagination"}
+      pageLinkClassName={"page-link"}
+      {...props}
+    />
+  </PaginationWrapper>
+);
 const PaginationWrapper = styled.div`
   .pagination > li {
     display: inline-block;

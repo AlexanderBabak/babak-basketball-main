@@ -1,7 +1,7 @@
-import { FC } from "react";
 import { ReactComponent as SearchImg } from "../../assets/images/icons/search.svg";
 import styled from "styled-components";
 import { UseFormMethods } from "react-hook-form";
+import { FC } from "react";
 
 export interface PropsInputSearch
   extends Partial<Pick<UseFormMethods, "register">> {
@@ -44,7 +44,6 @@ const InputWrapper = styled.div`
     width: 100%;
   }
 `;
-
 const Input = styled.input`
   width: 100%;
   background: transparent;
@@ -62,16 +61,14 @@ const Input = styled.input`
 
   @media screen and ${({ theme }) => theme.deviceSize.tablet} {
     padding: 8px 0;
-  }
+  } ;
 `;
-
 const IconWrapper = styled.button`
   display: flex;
   align-items: center;
   cursor: pointer;
   border: none;
   background: transparent;
-
   &:focus {
     outline: none;
   }
