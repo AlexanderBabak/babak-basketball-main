@@ -10,7 +10,6 @@ export const Button = styled.button<{ cancelBtn?: boolean }>`
   width: 100%;
   padding: 4px 0;
   margin: 24px 0;
-  outline: none;
   border: ${({ cancelBtn, theme }) =>
     cancelBtn ? `1px solid ${theme.colors.lightGrey}` : "none"};
   border-radius: 4px;
@@ -24,6 +23,10 @@ export const Button = styled.button<{ cancelBtn?: boolean }>`
     color: ${({ cancelBtn, theme }) =>
       cancelBtn ? theme.colors.lightGrey : "#ffffff"};
     transition: all 0.2s ease-in-out;
+  }
+
+  &:focus {
+    outline: none;
   }
 
   &:active {

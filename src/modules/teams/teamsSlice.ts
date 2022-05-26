@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Team } from "../../api/teams/TeamsDto";
 import { fetchTeams } from "./teamsAsyncActions";
+import { RootState } from "../../redux/store";
 
 export type Loading = "pending" | "idle";
 
@@ -33,6 +34,8 @@ const teamsSlice = createSlice({
     });
   },
 });
+
+export const teamsSelector = (state: RootState) => state.teams;
 
 export const teamsActions = teamsSlice.actions;
 

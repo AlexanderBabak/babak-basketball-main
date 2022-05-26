@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+// import { StrictMode } from "react";
 import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { App } from "./App";
@@ -7,11 +7,11 @@ import { store } from "./redux/store";
 import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
-  <StrictMode>
-    <ReduxProvider store={store}>
-      <App />
-    </ReduxProvider>
-  </StrictMode>,
+  // <StrictMode>
+  <ReduxProvider store={store}>
+    <App />
+  </ReduxProvider>,
+  // </StrictMode>,
   document.getElementById("root")
 );
 

@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { GlobalStyle } from "./assets/styles/globalStyles";
 import { ThemeProvider } from "styled-components";
 import { theme } from "./assets/styles/styledTheming";
