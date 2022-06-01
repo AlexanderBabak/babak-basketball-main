@@ -35,13 +35,13 @@ const HeaderContainer = styled.div`
   align-items: center;
   position: sticky;
   top: 0;
-  z-index: 99;
+  z-index: 200;
   width: 100%;
   background: #ffffff;
   box-shadow: 0 1px 10px rgba(209, 209, 209, 0.5);
   height: 62px;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     width: 100%;
     margin: 0 auto;
     padding-left: 50px;
@@ -60,7 +60,7 @@ const HeaderLogo = styled(NavLink)`
   cursor: pointer;
   text-decoration: none;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     width: 191px;
     height: 48px;
   }
@@ -72,7 +72,7 @@ const ImgLink = styled.img`
 
 const UserAccount = styled.div`
   display: none;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     display: flex;
     align-items: center;
   }
@@ -96,7 +96,7 @@ const MobileIcon = styled.div`
   transform: translate(-100%, 60%);
   cursor: pointer;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     display: none;
   }
 `;

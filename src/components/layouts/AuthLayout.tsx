@@ -68,7 +68,6 @@ const Title = styled.h1`
   justify-content: center;
   font-size: 36px;
   font-weight: 400;
-  //margin-bottom: 32px;
   color: ${({ theme }) => theme.colors.blue};
 
   @media screen and (min-width: 768px) {

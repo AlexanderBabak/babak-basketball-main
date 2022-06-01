@@ -64,7 +64,7 @@ const PaginationWrapper = styled.div`
     color: #707070;
   }
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     .pagination > li > a {
       padding: 6px 14px;
       line-height: 1.42857143;
