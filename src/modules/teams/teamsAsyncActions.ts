@@ -91,14 +91,8 @@ export const fetchAddTeam = createAsyncThunk<
   "teams/fetchAddTeam",
 
   async (AddTeamParams, { rejectWithValue, getState }) => {
-    const {
-      formData,
-      imageUrl,
-      name,
-      foundationYear,
-      division,
-      conference,
-    } = AddTeamParams;
+    const { formData, name, foundationYear, division, conference } =
+      AddTeamParams;
     try {
       const { auth } = getState() as RootState;
       if (!auth.user) {

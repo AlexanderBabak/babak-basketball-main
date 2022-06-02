@@ -5,9 +5,9 @@ type Props = Pick<TeamParams, "name" | "foundationYear" | "imageUrl">;
 
 export const TeamCard = ({ name, foundationYear, imageUrl }: Props) => (
   <>
-    <TeamLogoContainer>
-      <TeamLogo src={`http://dev.trainee.dex-it.ru${imageUrl}`} alt="img" />
-    </TeamLogoContainer>
+    <LogoContainer>
+      <Logo src={`http://dev.trainee.dex-it.ru${imageUrl}`} alt="img" />
+    </LogoContainer>
     <TeamDescription>
       <TeamName>{name}</TeamName>
       <TeamFoundation>Year of foundation: {foundationYear}</TeamFoundation>
@@ -15,7 +15,7 @@ export const TeamCard = ({ name, foundationYear, imageUrl }: Props) => (
   </>
 );
 
-const TeamLogoContainer = styled.div`
+const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
   padding: 25px 56px;
@@ -26,11 +26,11 @@ const TeamLogoContainer = styled.div`
     #393939 81.02%
   );
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 65px 0;
   }
 `;
-const TeamLogo = styled.img`
+const Logo = styled.img`
   max-width: 100%;
   max-height: 100%;
   object-fit: cover;
@@ -42,7 +42,7 @@ const TeamDescription = styled.div`
   background: ${({ theme }) => theme.colors.darkGrey};
   color: #ffffff;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 24px 0;
   } ;
 `;
@@ -50,14 +50,14 @@ const TeamName = styled.p`
   font-size: 12px;
   margin-bottom: 10px;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     font-size: 18px;
   }
 `;
 const TeamFoundation = styled.p`
   font-size: 10px;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     font-size: 14px;
   }
 `;

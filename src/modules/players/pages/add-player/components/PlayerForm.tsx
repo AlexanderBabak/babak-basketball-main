@@ -36,38 +36,38 @@ export const PlayerForm = ({
         <CustomInput register={register} name="name" label="Name" type="text" />
         <CustomSelect
           control={control}
-          nameSelect="Position"
+          nameSelect="position"
           label={"Position"}
           options={optionsPositions}
         />
         <CustomSelect
           control={control}
-          nameSelect="Team"
+          nameSelect="team"
           label={"Team"}
           options={optionsTeam}
         />
         <WrapperItemGrid>
           <CustomInput
             register={register}
-            name="Height"
+            name="height"
             label="Height (cm)"
             type="number"
           />
           <CustomInput
             register={register}
-            name="Weight"
+            name="weight"
             label="Weight (kg)"
             type="number"
           />
           <CustomInput
             register={register}
-            name="Birthday"
+            name="birthday"
             label="Birthday"
             type="date"
           />
           <CustomInput
             register={register}
-            name="Number"
+            name="number"
             label="Number"
             type="number"
           />
@@ -88,7 +88,7 @@ const Form = styled.form`
   border-radius: 10px;
   padding: 48px 24px;
   height: 100%;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     flex-direction: row;
     align-items: flex-start;
     padding: 48px 0;
@@ -108,7 +108,7 @@ const AddImg = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     justify-content: flex-start;
     max-width: 545px;
     margin: 0 75px;
@@ -127,7 +127,7 @@ const ImgInputWrapper = styled.div`
   border-radius: 10px;
   position: relative;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     max-width: 336px;
     width: 100%;
     height: 261px;
@@ -144,7 +144,7 @@ const FileInputIcon = styled(AddPhotoIcon)`
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0.7;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     max-width: 100%;
     max-height: 100%;
   }
@@ -157,7 +157,7 @@ const WrapperItem = styled.div`
   gap: 24px;
   width: 100%;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     margin-right: 24px;
   }
 `;

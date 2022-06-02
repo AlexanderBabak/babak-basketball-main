@@ -1,13 +1,14 @@
 import styled from "styled-components";
-import React, { FC } from "react";
+import { FC } from "react";
 import { ContentHeader } from "../ContentHeader";
 import { PropsInputSearch } from "../ui/InputSearch";
 import { ContentFooter } from "../ContentFooter";
 import { SelectProps } from "../ui/CustomSelect";
 
 interface Props extends PropsInputSearch, SelectProps {
+  pageCount: number;
   onSubmit: () => void;
-  onPageChange?(selectedItem: { selected: number }): void;
+  onPageChange(selectedItem: { selected: number }): void;
   addItemPath: string;
 }
 
@@ -21,18 +22,22 @@ export const ContentLayout: FC<Props> = ({
   children,
   onPageChange,
   addItemPath,
+  pageCount,
 }) => {
   return (
     <CardsSection>
-      <ContentHeader
-        addItemPath={addItemPath}
-        register={register}
-        placeholder={placeholder}
-        nameSearch={nameSearch}
-        onSubmit={onSubmit}
-      />
-      {children}
+      <ContentTopWrapper>
+        <ContentHeader
+          addItemPath={addItemPath}
+          register={register}
+          placeholder={placeholder}
+          nameSearch={nameSearch}
+          onSubmit={onSubmit}
+        />
+        {children}
+      </ContentTopWrapper>
       <ContentFooter
+        pageCount={pageCount}
         nameSelect={nameSelect}
         control={control}
         onPageChange={onPageChange}
@@ -41,8 +46,14 @@ export const ContentLayout: FC<Props> = ({
   );
 };
 const CardsSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
   padding: 0 12px;
   @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 0;
   }
 `;
+
+const ContentTopWrapper = styled.div``;

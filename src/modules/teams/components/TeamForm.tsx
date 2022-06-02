@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { UseFormMethods } from "react-hook-form";
+import { FieldErrors, UseFormMethods } from "react-hook-form";
 import { CustomInput } from "../../../components/ui/CustomInput";
 import { Button } from "../../../components/ui/Button";
 import { FileInput } from "../../../components/ui/FileInput";
@@ -8,9 +8,10 @@ import { ReactComponent as AddPhotoIcon } from "../../../assets/images/icons/add
 interface Props extends Partial<Pick<UseFormMethods, "register">> {
   onSubmit: () => void;
   teamLogo: string | undefined;
+  errors: FieldErrors;
 }
 
-export const TeamForm = ({ onSubmit, register, teamLogo }: Props) => {
+export const TeamForm = ({ onSubmit, register, teamLogo, errors }: Props) => {
   return (
     <Form onSubmit={onSubmit}>
       <AddImg>
@@ -27,24 +28,40 @@ export const TeamForm = ({ onSubmit, register, teamLogo }: Props) => {
             name="name"
             label="Name"
             type="text"
+            error={errors.name}
+            registerOptions={{
+              required: "Name is required.",
+            }}
           />
           <CustomInput
             register={register}
             name="division"
             label="Division"
             type="text"
+            error={errors.division}
+            registerOptions={{
+              required: "Division is required.",
+            }}
           />
           <CustomInput
             register={register}
             name="conference"
             label="Conference"
             type="text"
+            error={errors.conference}
+            registerOptions={{
+              required: "Conference is required.",
+            }}
           />
           <CustomInput
             register={register}
             name="foundationYear"
             label="Year of foundation"
             type="number"
+            error={errors.foundationYear}
+            registerOptions={{
+              required: "Year of foundation is required.",
+            }}
           />
         </AddTeamDetails>
         <ButtonsWrapper>
@@ -65,7 +82,7 @@ const Form = styled.form`
   border-radius: 10px;
   padding: 48px 24px;
   height: 100%;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     flex-direction: row;
     align-items: flex-start;
     padding: 48px 0;
@@ -78,7 +95,7 @@ const AddImg = styled.div`
   max-width: 100%;
   width: 100%;
   height: 100%;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     justify-content: flex-start;
     max-width: 545px;
     margin: 0 75px;
@@ -94,7 +111,7 @@ const ImgInputWrapper = styled.div`
   border-radius: 10px;
   position: relative;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     max-width: 336px;
     width: 100%;
     height: 261px;
@@ -111,7 +128,7 @@ const FileInputIcon = styled(AddPhotoIcon)`
   left: 50%;
   transform: translate(-50%, -50%);
   opacity: 0.7;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     max-width: 100%;
     max-height: 100%;
   }
@@ -135,7 +152,7 @@ const WrapperItem = styled.div`
   gap: 24px;
   width: 100%;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     margin-right: 24px;
   }
 `;
