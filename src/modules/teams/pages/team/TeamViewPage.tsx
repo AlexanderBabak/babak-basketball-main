@@ -10,6 +10,8 @@ import { teamsSelector } from "../../teamsSlice";
 import { pathList } from "../../../../routers/pathList";
 import { ReactComponent as UpdateImg } from "../../../../assets/images/icons/update.svg";
 import { ReactComponent as DeleteImg } from "../../../../assets/images/icons/delete.svg";
+import { fetchPlayersTeamIds } from "../../../players/playersAsyncActions";
+import { playersSelector } from "../../../players/playersSlice";
 
 interface ParamsId {
   id: string | undefined;
@@ -17,11 +19,16 @@ interface ParamsId {
 
 export const TeamViewPage = () => {
   const dispatch = useAppDispatch();
+
   const { id }: ParamsId = useParams();
+
   const { team } = useSelector(teamsSelector);
+
+  const { players } = useSelector(playersSelector);
 
   useEffect(() => {
     id && dispatch(fetchTeamId({ id }));
+    id && dispatch(fetchPlayersTeamIds([{ value: id }]));
   }, [dispatch, id]);
 
   return (
@@ -50,7 +57,7 @@ export const TeamViewPage = () => {
           foundationYear={team?.foundationYear}
           imageUrl={team?.imageUrl}
         />
-        <TeamComposition />
+        <TeamComposition players={players} />
       </ContentWrapper>
     </Container>
   );
@@ -65,7 +72,7 @@ const TeamViewHeader = styled.div`
   background: #ffffff;
   color: red;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 20px 32px;
   }
 `;
