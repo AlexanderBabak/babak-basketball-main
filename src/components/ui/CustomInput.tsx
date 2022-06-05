@@ -69,6 +69,10 @@ const InputWrapper = styled.div<{ error: boolean }>`
     margin: 0;
   }
 
+  & > input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.2;
+  }
+
   &:hover {
     background: ${({ theme }) => theme.colors.lightestGrey};
     transition: all 0.2s ease-in-out;
@@ -87,7 +91,7 @@ const InputWrapper = styled.div<{ error: boolean }>`
       background: ${({ theme }) => theme.colors.lightestGrey1};
     }
   }
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     height: 40px;
   }
 `;

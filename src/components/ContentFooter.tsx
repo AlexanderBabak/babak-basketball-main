@@ -1,4 +1,3 @@
-import { FC } from "react";
 import styled from "styled-components";
 import { CustomSelect, SelectProps } from "./ui/CustomSelect";
 import { Pagination } from "./Pagination";
@@ -9,23 +8,18 @@ const options = [
   { value: "24", label: "24" },
 ];
 
-interface Props extends SelectProps {
+interface Props extends Pick<SelectProps, "control"> {
   pageCount: number;
   onPageChange?(selectedItem: { selected: number }): void;
 }
 
-export const ContentFooter: FC<Props> = ({
-  nameSelect,
-  control,
-  onPageChange,
-  pageCount,
-}) => {
+export const ContentFooter = ({ control, onPageChange, pageCount }: Props) => {
   return (
     <ContentWrapper>
       <Pagination pageCount={pageCount} onPageChange={onPageChange} />
       <CustomSelectWrapper>
         <CustomSelect
-          nameSelect={nameSelect}
+          nameSelect={"pageSize"}
           control={control}
           selectPageSize
           options={options}
@@ -41,12 +35,8 @@ const ContentWrapper = styled.div`
 `;
 
 const CustomSelectWrapper = styled.div`
-  max-width: 60px;
+  max-width: 88px;
   width: 100%;
   border: 0.5px solid #d1d1d1;
   border-radius: 4px;
-
-  @media ${({ theme }) => theme.deviceSize.tablet} {
-    max-width: 88px;
-  }
 `;

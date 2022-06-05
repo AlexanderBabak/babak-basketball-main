@@ -1,7 +1,6 @@
-import { ReactComponent as SearchImg } from "../../assets/images/icons/search.svg";
 import styled from "styled-components";
 import { UseFormMethods } from "react-hook-form";
-import { FC } from "react";
+import { ReactComponent as SearchImg } from "../../assets/images/icons/search.svg";
 
 export interface PropsInputSearch
   extends Partial<Pick<UseFormMethods, "register">> {
@@ -10,12 +9,12 @@ export interface PropsInputSearch
   nameSearch: string;
 }
 
-export const SearchInput: FC<PropsInputSearch> = ({
+export const SearchInput = ({
   register,
   type,
   nameSearch,
   placeholder,
-}) => (
+}: PropsInputSearch) => (
   <InputWrapper>
     <Input
       ref={register}
@@ -39,7 +38,7 @@ const InputWrapper = styled.div`
   border: 0.5px solid #d1d1d1;
   border-radius: 4px;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     max-width: 365px;
     width: 100%;
   }
@@ -59,17 +58,11 @@ const Input = styled.input`
     color: ${({ theme }) => theme.colors.grey};
   }
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 8px 0;
   } ;
 `;
-const IconWrapper = styled.button`
+const IconWrapper = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  &:focus {
-    outline: none;
-  }
 `;

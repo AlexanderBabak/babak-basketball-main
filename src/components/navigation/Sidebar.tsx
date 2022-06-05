@@ -57,14 +57,14 @@ const SidebarContainer = styled.div<{ visible: boolean }>`
   width: 201px;
   position: absolute;
   top: 62px;
-  z-index: 100;
+  z-index: 200;
   left: ${({ visible }) => (visible ? 0 : "-100%")};
-  transition: left 0.5s ease;
+  transition: left 0.3s ease;
   height: calc(100vh - 62px);
   padding: 0 0 27px 0;
   background: #ffffff;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -85,7 +85,7 @@ const Nav = styled.nav`
   width: 100%;
   flex-direction: column;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     align-items: center;
   } ;
 `;
@@ -99,7 +99,7 @@ const UserAccount = styled.div`
   padding-left: 20px;
   border-bottom: 0.5px solid #9c9c9c;
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     display: none;
   }
 `;
@@ -135,7 +135,7 @@ const NavLinkItem = styled(NavLink)<{
     }
   }
 
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -145,7 +145,7 @@ const NavLinkItem = styled(NavLink)<{
 
 const LinkText = styled.p`
   margin: 0 0 0 8px;
-  @media screen and ${({ theme }) => theme.deviceSize.tablet} {
+  @media ${({ theme }) => theme.deviceSize.tablet} {
     margin: 4px 0 0 0;
   } ;
 `;
