@@ -1,9 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/Button";
-import { PropsInputSearch, SearchInput } from "./ui/InputSearch";
-import { CustomSelect, SelectOptions, SelectProps } from "./ui/CustomSelect";
+import { PropsInputSearch, InputSearch } from "./ui/InputSearch";
+import { Select, SelectOptions, SelectProps } from "./ui/Select/Select";
 import { useSelector } from "react-redux";
 import { playersSelector } from "../modules/players/playersSlice";
 
@@ -31,7 +30,7 @@ export const ContentHeader = ({
   return (
     <Wrapper>
       <FilterContainer>
-        <SearchInput
+        <InputSearch
           register={register}
           placeholder={placeholder}
           nameSearch={nameSearch}
@@ -41,7 +40,7 @@ export const ContentHeader = ({
           handleInputChange &&
           loadingTeamsFilter && (
             <SelectTeamName>
-              <CustomSelect
+              <Select
                 control={control}
                 nameSelect={nameSearchSelect}
                 isMulti
@@ -70,32 +69,30 @@ const Wrapper = styled.div`
 `;
 
 const FilterContainer = styled.div`
-  display: flex;
-  gap: 16px;
-  flex-direction: column;
   width: 100%;
 
   @media ${({ theme }) => theme.deviceSize.tablet} {
+    display: flex;
     flex-direction: row;
-    gap: 24px;
   }
 `;
 
 const SelectTeamName = styled.div`
   width: 100%;
-  border: 0.5px solid #d1d1d1;
+  margin: 16px 0 0 0;
+  border: 0.5px solid ${({ theme }) => theme.colors.lightestGrey};
   border-radius: 4px;
 
   @media ${({ theme }) => theme.deviceSize.tablet} {
     max-width: 364px;
-    margin-right: 24px;
+    margin: 0 24px;
   }
 `;
 
 const AddLink = styled(Link)`
-  margin-top: 16px;
   width: 100%;
   text-decoration: none;
+  margin-top: 16px;
   @media ${({ theme }) => theme.deviceSize.tablet} {
     width: 104px;
     margin-top: 0;

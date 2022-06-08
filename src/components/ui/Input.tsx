@@ -1,4 +1,3 @@
-import { FC } from "react";
 import styled from "styled-components";
 import { FieldError, RegisterOptions, UseFormMethods } from "react-hook-form";
 
@@ -15,7 +14,7 @@ interface InputProps
   error?: FieldError;
 }
 
-export const CustomInput: FC<InputProps> = ({
+export const Input = ({
   registerOptions,
   type,
   label,
@@ -24,12 +23,12 @@ export const CustomInput: FC<InputProps> = ({
   icon,
   onClickIcon,
   error,
-}): JSX.Element => {
+}: InputProps) => {
   return (
     <InputContainer>
       {label && <label>{label}</label>}
       <InputWrapper error={!!error}>
-        <Input
+        <StyledInput
           ref={register && register(registerOptions)}
           type={type}
           id={name}
@@ -41,11 +40,7 @@ export const CustomInput: FC<InputProps> = ({
           </IconWrapper>
         )}
       </InputWrapper>
-      {error && (
-        <ErrorMessage style={{ color: "#FF768E" }}>
-          {error.message}
-        </ErrorMessage>
-      )}
+      {error && <ErrorMessage>{error.message}</ErrorMessage>}
     </InputContainer>
   );
 };
@@ -97,11 +92,10 @@ const InputWrapper = styled.div<{ error: boolean }>`
 `;
 
 const InputContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   & > label {
+    line-height: 24px;
     color: ${({ theme }) => theme.colors.grey};
+    margin-bottom: 8px;
   }
 `;
 const IconWrapper = styled.div`
@@ -111,7 +105,7 @@ const IconWrapper = styled.div`
   cursor: pointer;
 `;
 
-const Input = styled.input`
+const StyledInput = styled.input`
   width: 100%;
   height: 100%;
   background: transparent;

@@ -31,8 +31,9 @@ interface FormFields {
 export const PlayersPage = () => {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState<number>(InitialPlayersPageParams.page);
-  const { loading, data, count, size, teamsFilter } =
-    useSelector(playersSelector);
+  const { loading, data, count, size, teamsFilter } = useSelector(
+    playersSelector
+  );
   const { register, control, watch } = useForm<FormFields>();
   const { pageSize, name, nameSelects } = watch([
     "pageSize",

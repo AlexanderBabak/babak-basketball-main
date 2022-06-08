@@ -1,9 +1,9 @@
-import Select from "react-select";
+import ReactSelect from "react-select";
 import { Control, FieldValues, Controller } from "react-hook-form";
 import styled from "styled-components";
-import { configTheme, ReactSelectStyles } from "./ReactSelectStyles";
+import { configTheme, SelectStyles } from "./SelectStyles";
 import { OptionsType } from "react-select/src/types";
-import { LoadState } from "../../redux/loadState";
+import { LoadState } from "../../../redux/loadState";
 
 export type SelectOptions = OptionsType<{
   value?: string | number;
@@ -22,7 +22,7 @@ export interface SelectProps<TFieldValues extends FieldValues = FieldValues> {
   loading?: LoadState;
 }
 
-export const CustomSelect = ({
+export const Select = ({
   control,
   nameSelect,
   options,
@@ -35,7 +35,7 @@ export const CustomSelect = ({
 }: SelectProps) => (
   <SelectContainer>
     {label && <label>{label}</label>}
-    <ReactSelectStyles>
+    <SelectStyles>
       <Controller
         name={nameSelect}
         control={control}
@@ -47,19 +47,18 @@ export const CustomSelect = ({
         defaultValue={selectPageSize && options ? options[0] : ""}
         classNamePrefix={"react-select"}
         theme={configTheme}
-        as={<Select />}
+        as={<ReactSelect />}
         maxMenuHeight={200}
         menuPlacement={selectPageSize ? "top" : "bottom"}
       />
-    </ReactSelectStyles>
+    </SelectStyles>
   </SelectContainer>
 );
 
 const SelectContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
   & > label {
+    line-height: 24px;
     color: ${({ theme }) => theme.colors.grey};
+    margin-bottom: 8px;
   }
 `;

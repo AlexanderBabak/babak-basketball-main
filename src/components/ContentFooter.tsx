@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { CustomSelect, SelectProps } from "./ui/CustomSelect";
+import { Select, SelectProps } from "./ui/Select/Select";
 import { Pagination } from "./Pagination";
 
 const options = [
@@ -17,14 +17,14 @@ export const ContentFooter = ({ control, onPageChange, pageCount }: Props) => {
   return (
     <ContentWrapper>
       <Pagination pageCount={pageCount} onPageChange={onPageChange} />
-      <CustomSelectWrapper>
-        <CustomSelect
+      <SelectWrapper>
+        <Select
           nameSelect={"pageSize"}
           control={control}
           selectPageSize
           options={options}
         />
-      </CustomSelectWrapper>
+      </SelectWrapper>
     </ContentWrapper>
   );
 };
@@ -34,9 +34,9 @@ const ContentWrapper = styled.div`
   justify-content: space-between;
 `;
 
-const CustomSelectWrapper = styled.div`
+const SelectWrapper = styled.div`
   max-width: 88px;
   width: 100%;
-  border: 0.5px solid #d1d1d1;
+  border: 0.5px solid ${({ theme }) => theme.colors.lightestGrey};
   border-radius: 4px;
 `;

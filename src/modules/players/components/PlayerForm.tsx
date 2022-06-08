@@ -1,14 +1,13 @@
-import { FileInput } from "../../../components/ui/FileInput";
+import { InputFile } from "../../../components/ui/InputFile";
 import styled from "styled-components";
-import { ReactComponent as AddPhotoIcon } from "../../../assets/images/icons/addPhoto.svg";
 import { UseFormMethods } from "react-hook-form";
 import { Button } from "../../../components/ui/Button";
-import { CustomInput } from "../../../components/ui/CustomInput";
+import { Input } from "../../../components/ui/Input";
 import {
-  CustomSelect,
+  Select,
   SelectOptions,
   SelectProps,
-} from "../../../components/ui/CustomSelect";
+} from "../../../components/ui/Select/Select";
 import { OptionTypeBase } from "react-select";
 
 export interface PlayerFormFields {
@@ -45,22 +44,21 @@ export const PlayerForm = ({
 }: Props) => {
   return (
     <Form onSubmit={onSubmit}>
-      <AddImg>
-        <ImgInputWrapper>
-          <FileInputIcon />
-          {playerImage && <PlayerImg src={playerImage} />}
-          <FileInput register={register} />
-        </ImgInputWrapper>
-      </AddImg>
+      <AddImgWrapper>
+        <InputFile
+          register={register}
+          image={playerImage && <PlayerImg src={playerImage} />}
+        />
+      </AddImgWrapper>
       <WrapperItem>
-        <CustomInput register={register} name="name" label="Name" type="text" />
-        <CustomSelect
+        <Input register={register} name="name" label="Name" type="text" />
+        <Select
           control={control}
           nameSelect="position"
           label={"Position"}
           options={optionsPositions}
         />
-        <CustomSelect
+        <Select
           control={control}
           nameSelect="team"
           label={"Team"}
@@ -69,25 +67,25 @@ export const PlayerForm = ({
           loading={loading}
         />
         <WrapperItemGrid>
-          <CustomInput
+          <Input
             register={register}
             name="height"
             label="Height (cm)"
             type="number"
           />
-          <CustomInput
+          <Input
             register={register}
             name="weight"
             label="Weight (kg)"
             type="number"
           />
-          <CustomInput
+          <Input
             register={register}
             name="birthday"
             label="Birthday"
             type="date"
           />
-          <CustomInput
+          <Input
             register={register}
             name="number"
             label="Number"
@@ -116,15 +114,7 @@ const Form = styled.form`
   }
 `;
 
-const PlayerImg = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  z-index: 50;
-  opacity: 0.5;
-  object-fit: scale-down;
-`;
-
-const AddImg = styled.div`
+const AddImgWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -136,48 +126,20 @@ const AddImg = styled.div`
   }
 `;
 
-const ImgInputWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  max-width: 185px;
-  width: 100%;
-  height: 144px;
-  margin-bottom: 48px;
-  background: #9c9c9c;
-  border-radius: 10px;
-  position: relative;
-
-  @media ${({ theme }) => theme.deviceSize.laptop} {
-    max-width: 336px;
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 1.287;
-    margin-bottom: 0;
-  }
-`;
-
-const FileInputIcon = styled(AddPhotoIcon)`
-  position: absolute;
-  z-index: 99;
-  max-width: 41px;
-  max-height: 40px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0.7;
-  @media ${({ theme }) => theme.deviceSize.laptop} {
-    max-width: 100%;
-    max-height: 100%;
-  }
+const PlayerImg = styled.img`
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 50;
+  opacity: 0.5;
+  object-fit: scale-down;
 `;
 
 const WrapperItem = styled.div`
-  display: flex;
-  flex-direction: column;
   max-width: 366px;
-  gap: 24px;
   width: 100%;
+  & > div {
+    margin-bottom: 24px;
+  }
 
   @media ${({ theme }) => theme.deviceSize.laptop} {
     margin-right: 24px;

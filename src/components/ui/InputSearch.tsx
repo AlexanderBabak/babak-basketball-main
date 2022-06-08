@@ -5,15 +5,15 @@ import { ReactComponent as SearchImg } from "../../assets/images/icons/search.sv
 export interface PropsInputSearch
   extends Partial<Pick<UseFormMethods, "register">> {
   placeholder: string;
-  type?: "text";
   nameSearch: string;
+  type?: "text";
 }
 
-export const SearchInput = ({
-  register,
-  type,
+export const InputSearch = ({
   nameSearch,
   placeholder,
+  register,
+  type,
 }: PropsInputSearch) => (
   <InputWrapper>
     <Input
@@ -34,8 +34,9 @@ const InputWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
+  min-height: 40px;
   padding: 0 12px;
-  border: 0.5px solid #d1d1d1;
+  border: 0.5px solid ${({ theme }) => theme.colors.lightestGrey};
   border-radius: 4px;
 
   @media ${({ theme }) => theme.deviceSize.tablet} {

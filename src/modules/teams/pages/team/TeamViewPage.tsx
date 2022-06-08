@@ -20,8 +20,9 @@ export const TeamViewPage = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { id }: ParamsId = useParams();
-  const { team, teamPlayers, loadingTeam, loadingTeamPlayers } =
-    useSelector(teamsSelector);
+  const { team, teamPlayers, loadingTeam, loadingTeamPlayers } = useSelector(
+    teamsSelector
+  );
 
   useEffect(() => {
     id && dispatch(fetchTeamId({ id }));

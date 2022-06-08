@@ -24,14 +24,23 @@ export const EditPlayerPage = () => {
   const { pathname } = useLocation();
   const { goBack } = useHistory();
   const { id } = useParams<{ id: string }>();
-  const { player, teamsFilter, loadingTeamsFilter, loadingPlayer } =
-    useSelector(playersSelector);
+  const {
+    player,
+    teamsFilter,
+    loadingTeamsFilter,
+    loadingPlayer,
+  } = useSelector(playersSelector);
   const [playerImage, setPlayerImage] = useState<string | undefined>();
   const { optionsPositions } = usePlayerPositions();
-  const { watch, register, handleSubmit, control, setValue } =
-    useForm<PlayerFormFields>({
-      mode: "onBlur",
-    });
+  const {
+    watch,
+    register,
+    handleSubmit,
+    control,
+    setValue,
+  } = useForm<PlayerFormFields>({
+    mode: "onBlur",
+  });
 
   const imageUpload = watch("file");
 
@@ -149,5 +158,5 @@ export const EditPlayerPage = () => {
 
 const AddPlayerWrapper = styled.div`
   border-radius: 10px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
 `;

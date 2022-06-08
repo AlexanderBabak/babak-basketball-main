@@ -37,7 +37,7 @@ const Wrapper = styled.div`
   justify-content: space-between;
   padding: 15px 16px;
   border-radius: 0;
-  background: #ffffff;
+  background: ${({ theme }) => theme.colors.white};
 
   @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 20px 32px;
@@ -47,7 +47,6 @@ const Wrapper = styled.div`
 
 const ActionLinks = styled.div`
   display: flex;
-  gap: 15px;
 `;
 
 const ItemLink = styled(Link)`
@@ -62,4 +61,5 @@ const Update = styled(UpdateImg)`
 const Delete = styled(DeleteImg)`
   width: 24px;
   height: 24px;
+  margin-left: 16px;
 `;
