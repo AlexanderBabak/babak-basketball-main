@@ -1,37 +1,36 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import debounce from "lodash.debounce";
 import styled from "styled-components";
 import { useAppDispatch } from "../../../../redux/store";
-import { toBase64 } from "../../../../core/helpers/toBase64";
 import { fetchAddPlayer, fetchTeamsFilter } from "../../playersAsyncActions";
 import { PlayerForm, PlayerFormFields } from "../../components/PlayerForm";
 import { ContentTitle } from "../../../../components/ContentTitle";
 import { pathList } from "../../../../routers/pathList";
 import { usePlayerPositions } from "../../usePlayerPositions";
 import { playersSelector } from "../../playersSlice";
+import { LoadState } from "../../../../redux/loadState";
+import { LoadingBackdrop } from "../../../../components/LoadingBackdrop";
+import { useImageUpload } from "../../../../core/hooks/useImageUpload";
 
 export const AddPlayerPage = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { goBack } = useHistory();
-  const { teamsFilter, loadingTeamsFilter } = useSelector(playersSelector);
-  const [playerImage, setPlayerImage] = useState<string | undefined>();
+  const { teamsFilter, loadingTeamsFilter, loading } =
+    useSelector(playersSelector);
   const { optionsPositions } = usePlayerPositions();
   const { watch, register, handleSubmit, control } = useForm<PlayerFormFields>({
     mode: "onBlur",
   });
   const imageUpload: FileList = watch("file");
+  const playerImage = useImageUpload<FileList>(imageUpload);
 
   useEffect(() => {
-    if (imageUpload && imageUpload[0]) {
-      toBase64(imageUpload[0]).then((base64) => {
-        base64 && setPlayerImage(base64.toString());
-      });
-    }
-  }, [imageUpload]);
+    dispatch(fetchTeamsFilter({}));
+  }, [dispatch]);
 
   const goBackHandler = () => goBack();
 
@@ -44,7 +43,7 @@ export const AddPlayerPage = () => {
 
   const handleInputChange = useCallback(
     (newValue: string) => {
-      dispatch(fetchTeamsFilter({ name: newValue }));
+      newValue && dispatch(fetchTeamsFilter({ name: newValue }));
     },
     [dispatch]
   );
@@ -81,17 +80,19 @@ export const AddPlayerPage = () => {
           { label: "Add new player", pathname: pathname },
         ]}
       />
-      <PlayerForm
-        handleInputChange={loadSuggestions}
-        register={register}
-        onSubmit={onSubmit}
-        playerImage={playerImage}
-        control={control}
-        optionsPositions={optionsPositions}
-        teamsOptions={teamsOptions}
-        loading={loadingTeamsFilter}
-        goBackHandler={goBackHandler}
-      />
+      <LoadingBackdrop loading={loading === LoadState.pending}>
+        <PlayerForm
+          handleInputChange={loadSuggestions}
+          register={register}
+          onSubmit={onSubmit}
+          playerImage={playerImage}
+          control={control}
+          optionsPositions={optionsPositions}
+          teamsOptions={teamsOptions}
+          loading={loadingTeamsFilter}
+          goBackHandler={goBackHandler}
+        />
+      </LoadingBackdrop>
     </AddPlayerWrapper>
   );
 };

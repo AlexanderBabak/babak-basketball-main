@@ -21,6 +21,16 @@ import { LoadState } from "../../../../redux/loadState";
 import { InitialPlayersPageParams } from "../../../../api/players/services";
 import { EmptyContent } from "../../../../components/EmptyContent";
 import emptyPlayerImg from "../../../../assets/images/empty-player-bg.png";
+import { useDebounceValue } from "../../../../core/hooks/useDebounceValue";
+import { InitialTeamsPageParams } from "../../../../api/teams/services";
+
+const DEFAULT_FIELD_VALUES = {
+  name: "",
+  pageSize: {
+    value: InitialTeamsPageParams.pageSize,
+    label: InitialTeamsPageParams.pageSize,
+  },
+};
 
 interface FormFields {
   pageSize: OptionTypeBase;
@@ -31,23 +41,31 @@ interface FormFields {
 export const PlayersPage = () => {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState<number>(InitialPlayersPageParams.page);
-  const { loading, data, count, size, teamsFilter } = useSelector(
-    playersSelector
-  );
-  const { register, control, watch } = useForm<FormFields>();
+  const { loading, data, count, size, teamsFilter } =
+    useSelector(playersSelector);
+  const { register, control, watch } = useForm<FormFields>({
+    defaultValues: DEFAULT_FIELD_VALUES,
+  });
   const { pageSize, name, nameSelects } = watch([
     "pageSize",
     "name",
     "nameSelects",
   ]);
+  const debounceName = useDebounceValue<string>(name);
+
+  useEffect(() => {
+    dispatch(fetchTeamsFilter({}));
+  }, [dispatch]);
 
   useEffect(() => {
     nameSelects && dispatch(fetchPlayersTeamIds(nameSelects));
   }, [dispatch, nameSelects]);
 
   useEffect(() => {
-    dispatch(fetchPlayers({ name, page, pageSize: pageSize?.value }));
-  }, [dispatch, pageSize, page, name]);
+    dispatch(
+      fetchPlayers({ name: debounceName, page, pageSize: pageSize?.value })
+    );
+  }, [dispatch, debounceName, pageSize, page]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);
@@ -69,13 +87,14 @@ export const PlayersPage = () => {
 
   const handleInputChange = useCallback(
     (newValue: string) => {
-      dispatch(
-        fetchTeamsFilter({
-          name: newValue,
-          page: page,
-          pageSize: pageSize?.value,
-        })
-      );
+      newValue &&
+        dispatch(
+          fetchTeamsFilter({
+            name: newValue,
+            page: page,
+            pageSize: pageSize?.value,
+          })
+        );
     },
     [dispatch, page, pageSize]
   );

@@ -76,7 +76,7 @@ export const fetchAddPlayer = createAsyncThunk<Player, PlayerParams>(
       }
     } catch (err) {
       if (err instanceof CustomError) {
-        notification("error", err.text);
+        notification("error", err.text, { toastId: err.code });
       } else {
         notification("error", "Неизвестная ошибка!");
       }
@@ -169,7 +169,7 @@ export const fetchEditPlayer = createAsyncThunk<Player, PlayerParams>(
       }
     } catch (err) {
       if (err instanceof CustomError) {
-        notification("error", err.text);
+        notification("error", err.text, { toastId: err.code });
       } else {
         notification("error", "Неизвестная ошибка!");
       }
@@ -186,13 +186,8 @@ export const fetchTeamsFilter = createAsyncThunk<Team[], ParamsGetElement>(
       if (!auth.user) {
         throw new Error("Invalid operation User is undefined");
       }
-
-      if (params.name) {
-        const response = await teamsServices.getTeams(auth.user, params);
-        return response.data;
-      } else {
-        return [];
-      }
+      const response = await teamsServices.getTeams(auth.user, params);
+      return response.data;
     } catch (err) {
       if (err.message) {
         return rejectWithValue(err.message);
