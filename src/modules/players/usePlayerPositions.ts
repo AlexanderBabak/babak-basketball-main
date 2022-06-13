@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { playersSelector } from "./playersSlice";
 import { useEffect, useMemo } from "react";
 import { fetchPositions } from "./playersAsyncActions";
-import { useAppDispatch } from "../../redux/store";
+import { useAppDispatch } from "../../core/redux/store";
 
 export const usePlayerPositions = () => {
   const dispatch = useAppDispatch();

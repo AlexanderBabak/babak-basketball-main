@@ -9,9 +9,9 @@ import {
   fetchPositions,
   fetchTeamsFilter,
 } from "./playersAsyncActions";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../core/redux/store";
 import { Player, PlayerParams } from "../../api/players/PlayersDto";
-import { LoadState } from "../../redux/loadState";
+import { LoadState } from "../../core/redux/loadState";
 import { TeamParams } from "../../api/teams/TeamsDto";
 
 interface PlayersState {

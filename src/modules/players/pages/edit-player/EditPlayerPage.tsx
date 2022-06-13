@@ -5,19 +5,19 @@ import { useForm } from "react-hook-form";
 import debounce from "lodash.debounce";
 import styled from "styled-components";
 import { PlayerForm, PlayerFormFields } from "../../components/PlayerForm";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import {
   fetchEditPlayer,
   fetchPlayerId,
   fetchTeamsFilter,
 } from "../../playersAsyncActions";
 import { playersSelector } from "../../playersSlice";
-import { ContentTitle } from "../../../../components/ContentTitle";
+import { ContentTitle } from "../../../../common/components/ContentTitle";
 import { pathList } from "../../../../routers/pathList";
 import { usePlayerPositions } from "../../usePlayerPositions";
-import { LoadState } from "../../../../redux/loadState";
-import { LoadingBackdrop } from "../../../../components/LoadingBackdrop";
-import { useImageUpload } from "../../../../core/hooks/useImageUpload";
+import { LoadState } from "../../../../core/redux/loadState";
+import { LoadingBackdrop } from "../../../../common/components/LoadingBackdrop";
+import { useImageUpload } from "../../../../common/hooks/useImageUpload";
 
 export const EditPlayerPage = () => {
   const dispatch = useAppDispatch();
@@ -65,7 +65,7 @@ export const EditPlayerPage = () => {
   const goBackHandler = () => goBack();
 
   const teamsOptions = useMemo(() => {
-    return teamsFilter.map((team) => ({
+    return teamsFilter.map((team: any) => ({
       value: team.id,
       label: team.name,
     }));

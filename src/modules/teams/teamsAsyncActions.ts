@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { teamsServices } from "../../api/teams/services";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../core/redux/store";
 import { TeamsResponse, Team, TeamParams } from "../../api/teams/TeamsDto";
 import { ParamsGetElement } from "../../api/appDto";
-import { CustomError } from "../../core/helpers/errorHelper";
-import { notification } from "../../core/helpers/notification";
+import { CustomError } from "../../common/helpers/errorHelper";
+import { notification } from "../../common/helpers/notification";
 import { getUploadedImage } from "../../api/postImg";
 import { PlayersResponse } from "../../api/players/PlayersDto";
 import { playerServices } from "../../api/players/services";

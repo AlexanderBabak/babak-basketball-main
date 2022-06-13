@@ -1,7 +1,7 @@
 import { baseFetch } from "../baseFetch";
 import { PlayersResponse, PlayerParams, Player } from "./PlayersDto";
 import { IdParams, ParamsGetElement } from "../appDto";
-import { CustomError } from "../../core/helpers/errorHelper";
+import { CustomError } from "../../common/helpers/errorHelper";
 import { User } from "../auth/AuthDto";
 
 const postPlayer = async (user: User, params: PlayerParams) => {

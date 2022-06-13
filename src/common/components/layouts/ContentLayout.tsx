@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { FC } from "react";
+import { FC } from "react";
 import { ContentHeader } from "../ContentHeader";
 import { PropsInputSearch } from "../ui/InputSearch";
 import { ContentFooter } from "../ContentFooter";

@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/images/logo.png";
-import { authSelector } from "../modules/auth/authSlice";
-import { ReactComponent as AccountIcon } from "../assets/images/icons/accountIcon.svg";
-import { ReactComponent as MenuIcon } from "../assets/images/icons/menu.svg";
+import Logo from "../../assets/images/logo.png";
+import { authSelector } from "../../modules/auth/authSlice";
+import { ReactComponent as AccountIcon } from "../../assets/images/icons/accountIcon.svg";
+import { ReactComponent as MenuIcon } from "../../assets/images/icons/menu.svg";
 
 interface Props {
   toggleSidebar: boolean;

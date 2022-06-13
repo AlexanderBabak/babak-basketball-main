@@ -3,7 +3,7 @@ import { Control, FieldValues, Controller } from "react-hook-form";
 import styled from "styled-components";
 import { configTheme, SelectStyles } from "./SelectStyles";
 import { OptionsType } from "react-select/src/types";
-import { LoadState } from "../../../redux/loadState";
+import { LoadState } from "../../../../core/redux/loadState";
 
 export type SelectOptions = OptionsType<{
   value?: string | number;

@@ -1,15 +1,15 @@
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import { useLocation, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { pathList } from "../../../../routers/pathList";
 import { PlayerProfile } from "./components/PlayerProfile";
 import { fetchDeletePlayer, fetchPlayerId } from "../../playersAsyncActions";
 import { playersSelector } from "../../playersSlice";
-import { getAge } from "../../../../core/helpers/getAge";
-import { ViewHeader } from "../../../../components/ViewHeader";
-import { LoadState } from "../../../../redux/loadState";
-import { Spinner } from "../../../../components/Spiner";
+import { getAge } from "../../../../common/helpers/getAge";
+import { ViewHeader } from "../../../../common/components/ViewHeader";
+import { LoadState } from "../../../../core/redux/loadState";
+import { Spinner } from "../../../../common/components/Spiner";
 
 export const PlayerViewPage = () => {
   const dispatch = useAppDispatch();

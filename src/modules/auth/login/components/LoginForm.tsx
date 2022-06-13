@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FieldErrors, UseFormMethods } from "react-hook-form";
-import { Button } from "../../../../components/ui/Button";
-import { Input } from "../../../../components/ui/Input";
-import { AuthNavigation } from "../../../../components/navigation/AuthNavigation";
+import { Button } from "../../../../common/components/ui/Button";
+import { Input } from "../../../../common/components/ui/Input";
+import { AuthNavigation } from "../../../../common/components/navigation/AuthNavigation";
 import iconVis from "../../../../assets/images/icons/visibility.svg";
 import iconVisOff from "../../../../assets/images/icons/visibility_off.svg";
 import { LoginParams } from "../../../../api/auth/AuthDto";

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LoginParams, RegisterParams, User } from "../../api/auth/AuthDto";
 import { authServices } from "../../api/auth/services";
-import { notification } from "../../core/helpers/notification";
-import { CustomError } from "../../core/helpers/errorHelper";
+import { notification } from "../../common/helpers/notification";
+import { CustomError } from "../../common/helpers/errorHelper";
 import { toast } from "react-toastify";
 
 export const signUpAction = createAsyncThunk<User, RegisterParams>(

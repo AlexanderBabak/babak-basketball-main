@@ -9,10 +9,10 @@ import { LoginPage } from "../modules/auth/login/LoginPage";
 import { RegistrationPage } from "../modules/auth/registration/RegistrationPage";
 import { PrivateRoute } from "./PrivateRoute";
 import { ContentRoutes } from "./ContentRoutes";
-import { Spinner } from "../components/Spiner";
+import { Spinner } from "../common/components/Spiner";
 import { useSelector } from "react-redux";
 import { authSelector } from "../modules/auth/authSlice";
-import { LoadState } from "../redux/loadState";
+import { LoadState } from "../core/redux/loadState";
 
 export const AppRouter = () => {
   const { loading } = useSelector(authSelector);

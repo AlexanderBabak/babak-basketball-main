@@ -1,6 +1,6 @@
 import { baseFetch } from "../baseFetch";
 import { RegisterParams, LoginParams } from "./AuthDto";
-import { CustomError } from "../../core/helpers/errorHelper";
+import { CustomError } from "../../common/helpers/errorHelper";
 
 const register = async (params: RegisterParams) => {
   const response = await baseFetch({

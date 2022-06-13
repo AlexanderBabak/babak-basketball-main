@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useAppDispatch } from "../../../redux/store";
+import { useAppDispatch } from "../../../core/redux/store";
 import { authSelector } from "../authSlice";
 import { LoginForm } from "./components/LoginForm";
 import { signInAction } from "../authActions";
 import { LoginParams } from "../../../api/auth/AuthDto";
 import { pathList } from "../../../routers/pathList";
-import { LoadingBackdrop } from "../../../components/LoadingBackdrop";
-import { LoadState } from "../../../redux/loadState";
-import { AuthLayout } from "../../../components/layouts/AuthLayout";
+import { LoadingBackdrop } from "../../../common/components/LoadingBackdrop";
+import { LoadState } from "../../../core/redux/loadState";
+import { AuthLayout } from "../../../common/components/layouts/AuthLayout";
 import layer1 from "../../../assets/images/login-bg.png";
 
 export const LoginPage = () => {

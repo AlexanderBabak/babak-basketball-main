@@ -7,14 +7,14 @@ import {
   fetchTeamId,
   fetchTeamPlayers,
 } from "../../teamsAsyncActions";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import { useSelector } from "react-redux";
 import { teamsSelector } from "../../teamsSlice";
 import { pathList } from "../../../../routers/pathList";
 import { ParamsId } from "../../../../api/appDto";
-import { ViewHeader } from "../../../../components/ViewHeader";
-import { LoadState } from "../../../../redux/loadState";
-import { Spinner } from "../../../../components/Spiner";
+import { ViewHeader } from "../../../../common/components/ViewHeader";
+import { LoadState } from "../../../../core/redux/loadState";
+import { Spinner } from "../../../../common/components/Spiner";
 
 export const TeamViewPage = () => {
   const dispatch = useAppDispatch();

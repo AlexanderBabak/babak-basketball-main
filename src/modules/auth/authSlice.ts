@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { signInAction, signUpAction } from "./authActions";
-import { RootState } from "../../redux/store";
-import { LoadState } from "../../redux/loadState";
+import { RootState } from "../../core/redux/store";
+import { LoadState } from "../../core/redux/loadState";
 import { User } from "../../api/auth/AuthDto";
 
 interface AuthState {

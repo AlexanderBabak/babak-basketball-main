@@ -1,13 +1,13 @@
 import { FieldErrors, UseFormMethods } from "react-hook-form";
 import styled from "styled-components";
-import { Input } from "../../../../components/ui/Input";
-import { AuthNavigation } from "../../../../components/navigation/AuthNavigation";
+import { Input } from "../../../../common/components/ui/Input";
+import { AuthNavigation } from "../../../../common/components/navigation/AuthNavigation";
 import iconVis from "../../../../assets/images/icons/visibility.svg";
 import iconVisOff from "../../../../assets/images/icons/visibility_off.svg";
 import { RegisterValues } from "../RegistrationPage";
-import { CheckBox } from "../../../../components/ui/CheckBox";
+import { CheckBox } from "../../../../common/components/ui/CheckBox";
 import { pathList } from "../../../../routers/pathList";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../../../../common/components/ui/Button";
 
 interface FormProps
   extends Partial<Pick<UseFormMethods, "register" | "errors">> {
@@ -48,7 +48,7 @@ export const RegistrationForm = ({
           registerOptions={{
             required: "Login is required.",
             pattern: {
-              value: /^[a-z0-9_-]{3,16}$/,
+              value: /^[a-z0-9_-]{3,16}$/i,
               message: "Invalid login.",
             },
           }}

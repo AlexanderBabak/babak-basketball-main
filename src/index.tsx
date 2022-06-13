@@ -2,7 +2,7 @@ import ReactDOM from "react-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { App } from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { store } from "./redux/store";
+import { store } from "./core/redux/store";
 import "react-toastify/dist/ReactToastify.css";
 import "./assets/styles/styles.css";
 

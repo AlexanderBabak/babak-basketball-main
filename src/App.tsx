@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ThemeProvider } from "styled-components";
 import { ToastContainer } from "react-toastify";
 import { styledTheme } from "./assets/styles/styledTheming";
-import { useAppDispatch } from "./redux/store";
+import { useAppDispatch } from "./core/redux/store";
 import { getUser } from "./modules/auth/authSlice";
 import { AppRouter } from "./routers/AppRouter";
 

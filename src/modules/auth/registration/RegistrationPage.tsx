@@ -3,15 +3,15 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { RegistrationForm } from "./components/RegistrationForm";
-import { useAppDispatch } from "../../../redux/store";
+import { useAppDispatch } from "../../../core/redux/store";
 import { signUpAction } from "../authActions";
 import { RegisterParams } from "../../../api/auth/AuthDto";
 import { authSelector } from "../authSlice";
 import { pathList } from "../../../routers/pathList";
-import { AuthLayout } from "../../../components/layouts/AuthLayout";
+import { AuthLayout } from "../../../common/components/layouts/AuthLayout";
 import layer2 from "../../../assets/images/register-bg.png";
-import { LoadingBackdrop } from "../../../components/LoadingBackdrop";
-import { LoadState } from "../../../redux/loadState";
+import { LoadingBackdrop } from "../../../common/components/LoadingBackdrop";
+import { LoadState } from "../../../core/redux/loadState";
 
 export interface RegisterValues extends RegisterParams {
   password_repeat: string;

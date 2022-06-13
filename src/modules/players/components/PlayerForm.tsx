@@ -1,13 +1,13 @@
-import { InputFile } from "../../../components/ui/InputFile";
+import { InputFile } from "../../../common/components/ui/InputFile";
 import styled from "styled-components";
 import { UseFormMethods } from "react-hook-form";
-import { Button } from "../../../components/ui/Button";
-import { Input } from "../../../components/ui/Input";
+import { Button } from "../../../common/components/ui/Button";
+import { Input } from "../../../common/components/ui/Input";
 import {
   Select,
   SelectOptions,
   SelectProps,
-} from "../../../components/ui/Select/Select";
+} from "../../../common/components/ui/Select/Select";
 import { OptionTypeBase } from "react-select";
 
 export interface PlayerFormFields {

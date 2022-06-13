@@ -4,16 +4,16 @@ import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import debounce from "lodash.debounce";
 import styled from "styled-components";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import { fetchAddPlayer, fetchTeamsFilter } from "../../playersAsyncActions";
 import { PlayerForm, PlayerFormFields } from "../../components/PlayerForm";
-import { ContentTitle } from "../../../../components/ContentTitle";
+import { ContentTitle } from "../../../../common/components/ContentTitle";
 import { pathList } from "../../../../routers/pathList";
 import { usePlayerPositions } from "../../usePlayerPositions";
 import { playersSelector } from "../../playersSlice";
-import { LoadState } from "../../../../redux/loadState";
-import { LoadingBackdrop } from "../../../../components/LoadingBackdrop";
-import { useImageUpload } from "../../../../core/hooks/useImageUpload";
+import { LoadState } from "../../../../core/redux/loadState";
+import { LoadingBackdrop } from "../../../../common/components/LoadingBackdrop";
+import { useImageUpload } from "../../../../common/hooks/useImageUpload";
 
 export const AddPlayerPage = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +35,7 @@ export const AddPlayerPage = () => {
   const goBackHandler = () => goBack();
 
   const teamsOptions = useMemo(() => {
-    return teamsFilter.map((team) => ({
+    return teamsFilter.map((team: any) => ({
       value: team.id,
       label: team.name,
     }));

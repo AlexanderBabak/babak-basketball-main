@@ -8,8 +8,8 @@ import {
   fetchTeamPlayers,
   fetchTeams,
 } from "./teamsAsyncActions";
-import { RootState } from "../../redux/store";
-import { LoadState } from "../../redux/loadState";
+import { RootState } from "../../core/redux/store";
+import { LoadState } from "../../core/redux/loadState";
 import { PlayerParams } from "../../api/players/PlayersDto";
 
 interface TeamsState {

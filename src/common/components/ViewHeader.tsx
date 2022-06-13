@@ -1,8 +1,8 @@
 import { Breadcrumbs } from "./navigation/Breadcrumbs";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { ReactComponent as UpdateImg } from "../assets/images/icons/update.svg";
-import { ReactComponent as DeleteImg } from "../assets/images/icons/delete.svg";
+import { ReactComponent as UpdateImg } from "../../assets/images/icons/update.svg";
+import { ReactComponent as DeleteImg } from "../../assets/images/icons/delete.svg";
 
 interface Props {
   crumbs: Array<{ pathname: string; label?: string }>;

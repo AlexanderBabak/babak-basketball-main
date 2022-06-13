@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../../redux/store";
+import { RootState } from "../../core/redux/store";
 import { playerServices } from "../../api/players/services";
 import { getUploadedImage } from "../../api/postImg";
 import {
@@ -8,8 +8,8 @@ import {
   PlayersResponse,
 } from "../../api/players/PlayersDto";
 import { ParamsGetElement } from "../../api/appDto";
-import { CustomError } from "../../core/helpers/errorHelper";
-import { notification } from "../../core/helpers/notification";
+import { CustomError } from "../../common/helpers/errorHelper";
+import { notification } from "../../common/helpers/notification";
 import { teamsServices } from "../../api/teams/services";
 import { Team } from "../../api/teams/TeamsDto";
 

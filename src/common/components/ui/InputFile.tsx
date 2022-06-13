@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { UseFormMethods } from "react-hook-form";
 import { FC, ReactNode } from "react";
-import { ReactComponent as AddPhotoIcon } from "../../assets/images/icons/addPhoto.svg";
+import { ReactComponent as AddPhotoIcon } from "../../../assets/images/icons/addPhoto.svg";
 
 interface InputProps extends Partial<Pick<UseFormMethods, "register">> {
   image: ReactNode;

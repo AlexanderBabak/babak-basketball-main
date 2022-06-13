@@ -6,12 +6,12 @@ import styled from "styled-components";
 import { fetchEditTeam, fetchTeamId } from "../../teamsAsyncActions";
 import { pathList } from "../../../../routers/pathList";
 import { TeamForm } from "../../components/TeamForm";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import { teamsSelector } from "../../teamsSlice";
-import { ContentTitle } from "../../../../components/ContentTitle";
-import { LoadState } from "../../../../redux/loadState";
-import { LoadingBackdrop } from "../../../../components/LoadingBackdrop";
-import { useImageUpload } from "../../../../core/hooks/useImageUpload";
+import { ContentTitle } from "../../../../common/components/ContentTitle";
+import { LoadState } from "../../../../core/redux/loadState";
+import { LoadingBackdrop } from "../../../../common/components/LoadingBackdrop";
+import { useImageUpload } from "../../../../common/hooks/useImageUpload";
 
 export const EditTeamPage = () => {
   const dispatch = useAppDispatch();

@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { FieldErrors, UseFormMethods } from "react-hook-form";
-import { Input } from "../../../components/ui/Input";
-import { Button } from "../../../components/ui/Button";
-import { InputFile } from "../../../components/ui/InputFile";
+import { Input } from "../../../common/components/ui/Input";
+import { Button } from "../../../common/components/ui/Button";
+import { InputFile } from "../../../common/components/ui/InputFile";
 
 interface Props extends Partial<Pick<UseFormMethods, "register">> {
   onSubmit: () => void;

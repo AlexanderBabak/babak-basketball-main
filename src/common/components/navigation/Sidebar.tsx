@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-import { useAppDispatch } from "../../redux/store";
-import { authSelector, logout } from "../../modules/auth/authSlice";
+import { useAppDispatch } from "../../../core/redux/store";
+import { authSelector, logout } from "../../../modules/auth/authSlice";
 import { useSelector } from "react-redux";
-import { pathList } from "../../routers/pathList";
-import { ReactComponent as OutPutIcon } from "../../assets/images/icons/output.svg";
-import { ReactComponent as TeamsIcon } from "../../assets/images/icons/teams.svg";
-import { ReactComponent as PlayersIcon } from "../../assets/images/icons/players.svg";
-import { ReactComponent as AccountIcon } from "../../assets/images/icons/accountIcon.svg";
+import { pathList } from "../../../routers/pathList";
+import { ReactComponent as OutPutIcon } from "../../../assets/images/icons/output.svg";
+import { ReactComponent as TeamsIcon } from "../../../assets/images/icons/teams.svg";
+import { ReactComponent as PlayersIcon } from "../../../assets/images/icons/players.svg";
+import { ReactComponent as AccountIcon } from "../../../assets/images/icons/accountIcon.svg";
 
 interface Props {
   toggleSidebar: boolean;

@@ -4,7 +4,7 @@ import { Button } from "./ui/Button";
 import { PropsInputSearch, InputSearch } from "./ui/InputSearch";
 import { Select, SelectOptions, SelectProps } from "./ui/Select/Select";
 import { useSelector } from "react-redux";
-import { playersSelector } from "../modules/players/playersSlice";
+import { playersSelector } from "../../modules/players/playersSlice";
 
 interface Props
   extends PropsInputSearch,

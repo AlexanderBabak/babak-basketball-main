@@ -5,23 +5,23 @@ import { Link } from "react-router-dom";
 import debounce from "lodash.debounce";
 import styled from "styled-components";
 import { CardWrapper } from "../../../../assets/styles/CardWrapper";
-import { ContentLayout } from "../../../../components/layouts/ContentLayout";
+import { ContentLayout } from "../../../../common/components/layouts/ContentLayout";
 import { PlayerCard } from "./components/PlayerCard";
 import { playersSelector } from "../../playersSlice";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import {
   fetchPlayers,
   fetchPlayersTeamIds,
   fetchTeamsFilter,
 } from "../../playersAsyncActions";
 import { pathList } from "../../../../routers/pathList";
-import { Spinner } from "../../../../components/Spiner";
+import { Spinner } from "../../../../common/components/Spiner";
 import { OptionTypeBase } from "react-select";
-import { LoadState } from "../../../../redux/loadState";
+import { LoadState } from "../../../../core/redux/loadState";
 import { InitialPlayersPageParams } from "../../../../api/players/services";
-import { EmptyContent } from "../../../../components/EmptyContent";
+import { EmptyContent } from "../../../../common/components/EmptyContent";
 import emptyPlayerImg from "../../../../assets/images/empty-player-bg.png";
-import { useDebounceValue } from "../../../../core/hooks/useDebounceValue";
+import { useDebounceValue } from "../../../../common/hooks/useDebounceValue";
 import { InitialTeamsPageParams } from "../../../../api/teams/services";
 
 const DEFAULT_FIELD_VALUES = {
@@ -79,7 +79,7 @@ export const PlayersPage = () => {
   }, [count, size]);
 
   const teamsOptions = useMemo(() => {
-    return teamsFilter.map((team) => ({
+    return teamsFilter.map((team: any) => ({
       value: team.id,
       label: team.name,
     }));
@@ -119,7 +119,7 @@ export const PlayersPage = () => {
       ) : data.length ? (
         <CardWrapper>
           {data &&
-            data.map(({ name, id, number, team, avatarUrl }) => {
+            data.map(({ name, id, number, team, avatarUrl }: any) => {
               return (
                 <PlayerLink to={pathList.content.players + id} key={id}>
                   <PlayerCard

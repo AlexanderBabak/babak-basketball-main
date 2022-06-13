@@ -1,4 +1,4 @@
-import { AppLayout } from "../components/layouts/AppLayout";
+import { AppLayout } from "../common/components/layouts/AppLayout";
 import { Route, Switch } from "react-router-dom";
 import { TeamsPage } from "../modules/teams/pages/teams/TeamsPage";
 import { PlayersPage } from "../modules/players/pages/players/PlayersPage";

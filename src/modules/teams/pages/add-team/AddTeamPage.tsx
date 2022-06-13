@@ -1,16 +1,16 @@
 import styled from "styled-components";
 import { TeamForm } from "../../components/TeamForm";
 import { useForm } from "react-hook-form";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import { fetchAddTeam } from "../../teamsAsyncActions";
 import { pathList } from "../../../../routers/pathList";
 import { useHistory, useLocation } from "react-router-dom";
-import { ContentTitle } from "../../../../components/ContentTitle";
-import { LoadState } from "../../../../redux/loadState";
-import { LoadingBackdrop } from "../../../../components/LoadingBackdrop";
+import { ContentTitle } from "../../../../common/components/ContentTitle";
+import { LoadState } from "../../../../core/redux/loadState";
+import { LoadingBackdrop } from "../../../../common/components/LoadingBackdrop";
 import { useSelector } from "react-redux";
 import { teamsSelector } from "../../teamsSlice";
-import { useImageUpload } from "../../../../core/hooks/useImageUpload";
+import { useImageUpload } from "../../../../common/hooks/useImageUpload";
 
 export const AddTeamPage = () => {
   const { pathname } = useLocation();

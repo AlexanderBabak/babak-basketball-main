@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { ContentLayout } from "../../../../components/layouts/ContentLayout";
+import { ContentLayout } from "../../../../common/components/layouts/ContentLayout";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TeamCard } from "./components/TeamCard";
@@ -7,16 +7,16 @@ import { useSelector } from "react-redux";
 import { teamsSelector } from "../../teamsSlice";
 import styled from "styled-components";
 import { fetchTeams } from "../../teamsAsyncActions";
-import { useAppDispatch } from "../../../../redux/store";
+import { useAppDispatch } from "../../../../core/redux/store";
 import { pathList } from "../../../../routers/pathList";
-import { Spinner } from "../../../../components/Spiner";
+import { Spinner } from "../../../../common/components/Spiner";
 import { CardWrapper } from "../../../../assets/styles/CardWrapper";
 import { OptionTypeBase } from "react-select";
 import { InitialTeamsPageParams } from "../../../../api/teams/services";
-import { EmptyContent } from "../../../../components/EmptyContent";
-import { LoadState } from "../../../../redux/loadState";
+import { EmptyContent } from "../../../../common/components/EmptyContent";
+import { LoadState } from "../../../../core/redux/loadState";
 import emptyTeamImg from "../../../../assets/images/empty-teams-bg.png";
-import { useDebounceValue } from "../../../../core/hooks/useDebounceValue";
+import { useDebounceValue } from "../../../../common/hooks/useDebounceValue";
 
 const DEFAULT_FIELD_VALUES = {
   name: "",
@@ -75,7 +75,7 @@ export const TeamsPage = () => {
       ) : dataTeams.length ? (
         <CardWrapper>
           {dataTeams &&
-            dataTeams.map(({ name, foundationYear, id, imageUrl }) => {
+            dataTeams.map(({ name, foundationYear, id, imageUrl }: any) => {
               return (
                 <TeamLink to={pathList.content.teams + id} key={id}>
                   <TeamCard

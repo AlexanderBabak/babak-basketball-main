@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { PlayerParams } from "../../../../../api/players/PlayersDto";
-import { getAge } from "../../../../../core/helpers/getAge";
+import { getAge } from "../../../../../common/helpers/getAge";
 import { Link } from "react-router-dom";
 import { pathList } from "../../../../../routers/pathList";
 
