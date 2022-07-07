@@ -67,6 +67,10 @@ export const RegistrationForm = ({
               value: 6,
               message: "Password must be at least 6 characters.",
             },
+            pattern: {
+              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.{9,}\d)[a-zA-Z\d]{10,}$/,
+              message: "Минимум 1 большая буква, 1 маленькая и 8 цифр.",
+            },
           }}
         />
         <Input

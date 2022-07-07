@@ -23,6 +23,7 @@ import { EmptyContent } from "../../../../common/components/EmptyContent";
 import emptyPlayerImg from "../../../../assets/images/empty-player-bg.png";
 import { useDebounceValue } from "../../../../common/hooks/useDebounceValue";
 import { InitialTeamsPageParams } from "../../../../api/teams/services";
+import { TeamParams } from "../../../../api/teams/TeamsDto";
 
 const DEFAULT_FIELD_VALUES = {
   name: "",
@@ -79,7 +80,7 @@ export const PlayersPage = () => {
   }, [count, size]);
 
   const teamsOptions = useMemo(() => {
-    return teamsFilter.map((team: any) => ({
+    return teamsFilter.map((team: TeamParams) => ({
       value: team.id,
       label: team.name,
     }));

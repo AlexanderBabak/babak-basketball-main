@@ -138,6 +138,6 @@ const WrapperItem = styled.div`
 const ButtonsWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  grid-gap: 24px;
   width: 100%;
 `;

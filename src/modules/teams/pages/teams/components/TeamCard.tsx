@@ -20,6 +20,7 @@ const LogoContainer = styled.div`
   justify-content: center;
   padding: 25px 56px;
   border-radius: 4px 4px 0 0;
+  height: 280px;
   background: linear-gradient(
     121.57deg,
     ${({ theme }) => theme.colors.grey} 1.62%,
@@ -31,9 +32,10 @@ const LogoContainer = styled.div`
   }
 `;
 const Logo = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+  max-width: 150px;
+  width: 100%;
+  height: 90%;
+  object-fit: contain;
 `;
 const TeamDescription = styled.div`
   text-align: center;

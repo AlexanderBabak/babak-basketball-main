@@ -49,6 +49,7 @@ export const CheckBox: FC<CheckBoxProps> = ({
 const CheckBoxWrapper = styled.div`
   display: flex;
   align-items: center;
+  position: relative;
 `;
 
 const CheckBoxLabel = styled.label<{ error: boolean }>`
@@ -61,6 +62,8 @@ const ErrorMessage = styled.p`
   color: ${({ theme }) => theme.colors.lightRed};
   font-size: 12px;
   line-height: 18px;
+  position: absolute;
+  bottom: 89px;
 `;
 
 const CheckboxContainer = styled.div`

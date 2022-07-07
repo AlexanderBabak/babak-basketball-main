@@ -17,7 +17,10 @@ export const AppLayout: FC = ({ children }) => {
         onToggleSidebar={handleToggleSidebar}
       />
       <ContentWrapper>
-        <Sidebar toggleSidebar={toggleSidebar} />
+        <Sidebar
+          toggleSidebar={toggleSidebar}
+          onToggleSidebar={handleToggleSidebar}
+        />
         {toggleSidebar && <BackDrop onClick={handleToggleSidebar} />}
         <Content>{children}</Content>
       </ContentWrapper>

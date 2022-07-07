@@ -150,5 +150,5 @@ const WrapperItemGrid = styled.div`
   display: grid;
   grid-template-columns: calc(50% - 12px) calc(50% - 12px);
   width: 100%;
-  gap: 24px;
+  grid-gap: 24px;
 `;

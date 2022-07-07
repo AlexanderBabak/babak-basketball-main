@@ -1,4 +1,6 @@
-export const getAge = (player: any) => {
+import { PlayerParams } from "../../api/players/PlayersDto";
+
+export const getAge = (player: PlayerParams) => {
   const today = new Date();
   const birthDate = new Date(player?.birthday);
   let age = today.getFullYear() - birthDate.getFullYear();

@@ -14,6 +14,7 @@ import { playersSelector } from "../../playersSlice";
 import { LoadState } from "../../../../core/redux/loadState";
 import { LoadingBackdrop } from "../../../../common/components/LoadingBackdrop";
 import { useImageUpload } from "../../../../common/hooks/useImageUpload";
+import { TeamParams } from "../../../../api/teams/TeamsDto";
 
 export const AddPlayerPage = () => {
   const dispatch = useAppDispatch();
@@ -35,7 +36,7 @@ export const AddPlayerPage = () => {
   const goBackHandler = () => goBack();
 
   const teamsOptions = useMemo(() => {
-    return teamsFilter.map((team: any) => ({
+    return teamsFilter.map((team: TeamParams) => ({
       value: team.id,
       label: team.name,
     }));

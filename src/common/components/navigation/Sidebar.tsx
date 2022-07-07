@@ -11,9 +11,10 @@ import { ReactComponent as AccountIcon } from "../../../assets/images/icons/acco
 
 interface Props {
   toggleSidebar: boolean;
+  onToggleSidebar: () => void;
 }
 
-export const Sidebar = ({ toggleSidebar }: Props) => {
+export const Sidebar = ({ toggleSidebar, onToggleSidebar }: Props) => {
   const dispatch = useAppDispatch();
   const { user } = useSelector(authSelector);
 
@@ -28,11 +29,11 @@ export const Sidebar = ({ toggleSidebar }: Props) => {
           <UserImg />
           {user && <UserName>{user.name}</UserName>}
         </UserAccount>
-        <NavLinkItem to={pathList.content.teams}>
+        <NavLinkItem to={pathList.content.teams} onClick={onToggleSidebar}>
           <TeamsIcon />
           <LinkText>Teams</LinkText>
         </NavLinkItem>
-        <NavLinkItem to={pathList.content.players}>
+        <NavLinkItem to={pathList.content.players} onClick={onToggleSidebar}>
           <PlayersIcon />
           <LinkText> Players</LinkText>
         </NavLinkItem>

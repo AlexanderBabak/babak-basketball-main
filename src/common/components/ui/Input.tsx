@@ -116,6 +116,7 @@ const StyledInput = styled.input`
   }
 `;
 const ErrorMessage = styled.p`
+  position: absolute;
   color: ${({ theme }) => theme.colors.lightRed};
   font-size: 12px;
   line-height: 18px;

@@ -53,6 +53,7 @@ const CardsSection = styled.section`
   display: flex;
   flex-direction: column;
   padding: 0 12px;
+  justify-content: space-between;
 
   @media ${({ theme }) => theme.deviceSize.tablet} {
     padding: 0;

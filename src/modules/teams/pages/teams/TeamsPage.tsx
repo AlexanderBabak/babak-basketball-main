@@ -17,6 +17,7 @@ import { EmptyContent } from "../../../../common/components/EmptyContent";
 import { LoadState } from "../../../../core/redux/loadState";
 import emptyTeamImg from "../../../../assets/images/empty-teams-bg.png";
 import { useDebounceValue } from "../../../../common/hooks/useDebounceValue";
+import { TeamParams } from "../../../../api/teams/TeamsDto";
 
 const DEFAULT_FIELD_VALUES = {
   name: "",
@@ -75,17 +76,19 @@ export const TeamsPage = () => {
       ) : dataTeams.length ? (
         <CardWrapper>
           {dataTeams &&
-            dataTeams.map(({ name, foundationYear, id, imageUrl }: any) => {
-              return (
-                <TeamLink to={pathList.content.teams + id} key={id}>
-                  <TeamCard
-                    name={name}
-                    foundationYear={foundationYear}
-                    imageUrl={imageUrl}
-                  />
-                </TeamLink>
-              );
-            })}
+            dataTeams.map(
+              ({ name, foundationYear, id, imageUrl }: TeamParams) => {
+                return (
+                  <TeamLink to={pathList.content.teams + id} key={id}>
+                    <TeamCard
+                      name={name}
+                      foundationYear={foundationYear}
+                      imageUrl={imageUrl}
+                    />
+                  </TeamLink>
+                );
+              }
+            )}
         </CardWrapper>
       ) : (
         <EmptyContent label={"team"} emptyImg={emptyTeamImg} />
