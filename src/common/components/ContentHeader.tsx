@@ -13,6 +13,7 @@ interface Props
   nameSearchSelect?: string;
   loadOptions?: (inputValue: string) => Promise<any> | void;
   selectOptions?: SelectOptions;
+  count: any;
 }
 
 export const ContentHeader = ({
@@ -24,34 +25,40 @@ export const ContentHeader = ({
   control,
   selectOptions,
   handleInputChange,
+  count,
 }: Props) => {
   const { loadingTeamsFilter } = useSelector(playersSelector);
 
   return (
     <Wrapper>
-      <FilterContainer>
-        <InputSearch
-          register={register}
-          placeholder={placeholder}
-          nameSearch={nameSearch}
-        />
-        {nameSearchSelect &&
-          selectOptions &&
-          handleInputChange &&
-          loadingTeamsFilter && (
-            <SelectTeamName>
-              <Select
-                control={control}
-                nameSelect={nameSearchSelect}
-                isMulti
-                options={selectOptions}
-                handleInputChange={handleInputChange}
-                loading={loadingTeamsFilter}
-                selectTeamName
-              />
-            </SelectTeamName>
-          )}
-      </FilterContainer>
+      {count > 0 ? (
+        <FilterContainer>
+          <InputSearch
+            register={register}
+            placeholder={placeholder}
+            nameSearch={nameSearch}
+          />
+          {nameSearchSelect &&
+            selectOptions &&
+            handleInputChange &&
+            loadingTeamsFilter && (
+              <SelectTeamName>
+                <Select
+                  control={control}
+                  nameSelect={nameSearchSelect}
+                  isMulti
+                  options={selectOptions}
+                  handleInputChange={handleInputChange}
+                  loading={loadingTeamsFilter}
+                  selectTeamName
+                />
+              </SelectTeamName>
+            )}
+        </FilterContainer>
+      ) : (
+        <div></div>
+      )}
+
       <AddLink to={addItemPath}>
         <Button>Add +</Button>
       </AddLink>

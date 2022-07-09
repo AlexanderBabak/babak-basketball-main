@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import noLogo from "../../../../../assets/images/no-logo.png";
 
 interface Props {
   avatarUrl?: string;
@@ -31,12 +32,14 @@ export const PlayerProfile = ({
     { label: "Weight", value: weight },
     { label: "Age", value: age },
   ];
+
   return (
     <ProfileContainer>
       <ImgWrapper>
-        {avatarUrl && (
-          <Img src={`http://dev.trainee.dex-it.ru${avatarUrl}`} alt={"Logo"} />
-        )}
+        <Img
+          src={avatarUrl ? `http://dev.trainee.dex-it.ru${avatarUrl}` : noLogo}
+          alt={"Logo"}
+        />
       </ImgWrapper>
       <PlayerInfo>
         <PlayerName>

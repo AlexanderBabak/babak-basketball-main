@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { TeamCard } from "./components/TeamCard";
 import { useSelector } from "react-redux";
-import { teamsSelector } from "../../teamsSlice";
+import { clearData, teamsSelector } from "../../teamsSlice";
 import styled from "styled-components";
 import { fetchTeams } from "../../teamsAsyncActions";
 import { useAppDispatch } from "../../../../core/redux/store";
@@ -37,17 +37,42 @@ export const TeamsPage = () => {
   const dispatch = useAppDispatch();
   const { dataTeams, loading, count, size } = useSelector(teamsSelector);
   const [page, setPage] = useState<number>(InitialTeamsPageParams.page);
-  const { register, control, watch } = useForm<FormFields>({
+  const { register, reset, control, watch } = useForm<FormFields>({
     defaultValues: DEFAULT_FIELD_VALUES,
   });
   const pageSize = watch("pageSize");
   const name = watch("name");
   const debounceName = useDebounceValue<string>(name);
 
+  const [countAll, setCount] = useState(0);
+
   useEffect(() => {
-    dispatch(
-      fetchTeams({ name: debounceName, pageSize: pageSize?.value, page })
-    );
+    const value = localStorage.getItem("search");
+    if (value === name) return;
+    value && reset({ name: value });
+    localStorage.removeItem("search");
+
+    window.addEventListener("unload", function () {
+      localStorage.setItem("search", name);
+    });
+    return () => window.removeEventListener("unload", () => {});
+  }, [name]);
+
+  useEffect(() => {
+    dispatch(fetchTeams({ pageSize: pageSize?.value, page })).then((res) => {
+      const payload = res.payload as { count: number };
+      setCount(payload.count);
+    });
+    return () => {
+      dispatch(clearData());
+    };
+  }, []);
+
+  useEffect(() => {
+    countAll > 0 &&
+      dispatch(
+        fetchTeams({ name: debounceName, pageSize: pageSize?.value, page })
+      );
   }, [dispatch, debounceName, pageSize, page]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
@@ -70,6 +95,7 @@ export const TeamsPage = () => {
       control={control}
       addItemPath={pathList.content.addTeam}
       pageCount={pageCount}
+      count={countAll}
     >
       {loading === LoadState.pending ? (
         <Spinner />

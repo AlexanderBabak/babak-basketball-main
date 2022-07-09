@@ -17,6 +17,7 @@ export const signUpAction = createAsyncThunk<User, RegisterParams>(
         login,
         password,
       });
+
       localStorage.setItem("user", JSON.stringify(registerData));
       return registerData;
     } catch (err) {
@@ -34,8 +35,7 @@ export const signUpAction = createAsyncThunk<User, RegisterParams>(
 export const signInAction = createAsyncThunk<User, LoginParams>(
   "auth/signIn",
 
-  async (loginParams, thunkAPI) => {
-    const { rejectWithValue } = thunkAPI;
+  async (loginParams, { rejectWithValue }) => {
     try {
       const loginData = await authServices.login(loginParams);
       localStorage.setItem("user", JSON.stringify(loginData));

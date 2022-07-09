@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { TeamParams } from "../../../../../api/teams/TeamsDto";
+import noLogo from "../../../../../assets/images/no-logo.png";
 
 type Props = Pick<TeamParams, "name" | "foundationYear" | "imageUrl">;
 
 export const TeamCard = ({ name, foundationYear, imageUrl }: Props) => (
   <>
     <LogoContainer>
-      <Logo src={`http://dev.trainee.dex-it.ru${imageUrl}`} alt="img" />
+      <Logo
+        src={imageUrl ? `http://dev.trainee.dex-it.ru${imageUrl}` : noLogo}
+        alt="img"
+      />
     </LogoContainer>
     <TeamDescription>
       <TeamName>{name}</TeamName>

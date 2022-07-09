@@ -33,7 +33,12 @@ const initialState: TeamsState = {
 const teamsSlice = createSlice({
   name: "teams",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    clearData(state): void {
+      state.dataTeams = [];
+      state.teamPlayers = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchTeams.pending, (state) => {
       state.loading = LoadState.pending;
@@ -100,5 +105,5 @@ const teamsSlice = createSlice({
 });
 
 export const teamsSelector = (state: RootState) => state.teams;
-export const teamsActions = teamsSlice.actions;
+export const { clearData } = teamsSlice.actions;
 export const teamsReducer = teamsSlice.reducer;

@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import { PlayerParams } from "../../../../../api/players/PlayersDto";
+import noLogo from "../../../../../assets/images/no-logo.png";
 
 type Props = Pick<PlayerParams, "name" | "number" | "team" | "avatarUrl">;
 
 export const PlayerCard = ({ name, number, team, avatarUrl }: Props) => (
   <>
     <ImgContainer>
-      <Img src={`http://dev.trainee.dex-it.ru${avatarUrl}`} alt="photo" />
+      <Img
+        src={avatarUrl ? `http://dev.trainee.dex-it.ru${avatarUrl}` : noLogo}
+        alt="photo"
+      />
     </ImgContainer>
     <Description>
       <PlayerName>

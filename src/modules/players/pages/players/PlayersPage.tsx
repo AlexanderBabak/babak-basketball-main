@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { CardWrapper } from "../../../../assets/styles/CardWrapper";
 import { ContentLayout } from "../../../../common/components/layouts/ContentLayout";
 import { PlayerCard } from "./components/PlayerCard";
-import { playersSelector } from "../../playersSlice";
+import { clearData, playersSelector } from "../../playersSlice";
 import { useAppDispatch } from "../../../../core/redux/store";
 import {
   fetchPlayers,
@@ -44,7 +44,7 @@ export const PlayersPage = () => {
   const [page, setPage] = useState<number>(InitialPlayersPageParams.page);
   const { loading, data, count, size, teamsFilter } =
     useSelector(playersSelector);
-  const { register, control, watch } = useForm<FormFields>({
+  const { register, control, reset, watch } = useForm<FormFields>({
     defaultValues: DEFAULT_FIELD_VALUES,
   });
   const { pageSize, name, nameSelects } = watch([
@@ -52,10 +52,30 @@ export const PlayersPage = () => {
     "name",
     "nameSelects",
   ]);
+  const [countAll, setCount] = useState(0);
   const debounceName = useDebounceValue<string>(name);
 
   useEffect(() => {
+    const value = localStorage.getItem("search");
+    if (value === name) return;
+    value && reset({ name: value });
+    localStorage.removeItem("search");
+
+    window.addEventListener("unload", function () {
+      localStorage.setItem("search", name);
+    });
+    return () => window.removeEventListener("unload", () => {});
+  }, [name]);
+
+  useEffect(() => {
+    dispatch(fetchPlayers({ page, pageSize: pageSize?.value })).then((res) => {
+      const payload = res.payload as { count: number };
+      setCount(payload.count);
+    });
     dispatch(fetchTeamsFilter({}));
+    return () => {
+      dispatch(clearData());
+    };
   }, [dispatch]);
 
   useEffect(() => {
@@ -63,9 +83,10 @@ export const PlayersPage = () => {
   }, [dispatch, nameSelects]);
 
   useEffect(() => {
-    dispatch(
-      fetchPlayers({ name: debounceName, page, pageSize: pageSize?.value })
-    );
+    countAll > 0 &&
+      dispatch(
+        fetchPlayers({ name: debounceName, page, pageSize: pageSize?.value })
+      );
   }, [dispatch, debounceName, pageSize, page]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
@@ -114,6 +135,7 @@ export const PlayersPage = () => {
       control={control}
       addItemPath={pathList.content.addPlayer}
       pageCount={pageCount}
+      count={countAll}
     >
       {loading === LoadState.pending ? (
         <Spinner />

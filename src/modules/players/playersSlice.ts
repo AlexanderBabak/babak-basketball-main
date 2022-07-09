@@ -35,7 +35,12 @@ const initialState: PlayersState = {
 const playersSlice = createSlice({
   name: "players",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    clearData(state): void {
+      state.data = [];
+      state.teamsFilter = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchPlayers.pending, (state) => {
       state.loading = LoadState.pending;
@@ -125,5 +130,6 @@ const playersSlice = createSlice({
 });
 
 export const playersSelector = (state: RootState) => state.players;
-export const teamsActions = playersSlice.actions;
+export const { clearData } = playersSlice.actions;
+
 export const playersReducer = playersSlice.reducer;

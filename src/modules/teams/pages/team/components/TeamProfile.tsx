@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import noLogo from "../../../../../assets/images/no-logo.png";
 
 interface Props {
   name?: string;
@@ -23,9 +24,10 @@ export const TeamProfile = ({
   return (
     <ProfileContainer>
       <LogoWrapper>
-        {imageUrl && (
-          <Logo src={`http://dev.trainee.dex-it.ru${imageUrl}`} alt={"Logo"} />
-        )}
+        <Logo
+          src={imageUrl ? `http://dev.trainee.dex-it.ru${imageUrl}` : noLogo}
+          alt={"Logo"}
+        />
       </LogoWrapper>
       <TeamInfo>
         <TeamName>{name}</TeamName>

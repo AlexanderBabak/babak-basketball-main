@@ -13,6 +13,7 @@ interface Props
   addItemPath: string;
   nameSearchSelect?: string;
   selectOptions?: SelectOptions;
+  count: number | undefined;
 }
 
 export const ContentLayout: FC<Props> = ({
@@ -27,6 +28,7 @@ export const ContentLayout: FC<Props> = ({
   nameSearchSelect,
   selectOptions,
   handleInputChange,
+  count,
 }) => {
   return (
     <CardsSection>
@@ -39,6 +41,7 @@ export const ContentLayout: FC<Props> = ({
         register={register}
         placeholder={placeholder}
         nameSearch={nameSearch}
+        count={count}
       />
       <ContentWrapper>{children}</ContentWrapper>
       <ContentFooter
