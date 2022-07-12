@@ -1,14 +1,10 @@
-import { baseFetch } from "../baseFetch";
+import { post } from "../baseFetch";
 import { RegisterParams, LoginParams } from "./AuthDto";
 import { CustomError } from "../../common/helpers/errorHelper";
 
 const register = async (params: RegisterParams) => {
-  const response = await baseFetch({
-    url: "api/Auth/SignUp",
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(params),
-  });
+  const response = await post("api/Auth/SignUp", JSON.stringify(params));
+
   if (!response.ok) {
     switch (response.status) {
       case 409:
@@ -26,13 +22,9 @@ const register = async (params: RegisterParams) => {
 
   return response.json();
 };
+
 const login = async (params: LoginParams) => {
-  const response = await baseFetch({
-    url: "api/Auth/SignIn",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(params),
-    method: "POST",
-  });
+  const response = await post("api/Auth/SignIn", JSON.stringify(params));
 
   if (!response.ok) {
     switch (response.status) {
@@ -48,6 +40,7 @@ const login = async (params: LoginParams) => {
         );
     }
   }
+
   return response.json();
 };
 

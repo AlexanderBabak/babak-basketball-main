@@ -22,9 +22,9 @@ export const TeamCard = ({ name, foundationYear, imageUrl }: Props) => (
 const LogoContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 25px 56px;
+  padding: 25px 40px;
   border-radius: 4px 4px 0 0;
-  height: 280px;
+  height: 160px;
   background: linear-gradient(
     121.57deg,
     ${({ theme }) => theme.colors.grey} 1.62%,
@@ -32,7 +32,11 @@ const LogoContainer = styled.div`
   );
 
   @media ${({ theme }) => theme.deviceSize.tablet} {
+    height: 240px;
+  }
+  @media ${({ theme }) => theme.deviceSize.laptop} {
     padding: 65px 10px;
+    height: 280px;
   }
 `;
 const Logo = styled.img`

@@ -25,25 +25,29 @@ export const PlayerCard = ({ name, number, team, avatarUrl }: Props) => (
 const ImgContainer = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-end;
   padding: 11px 24px 0 24px;
+  align-items: flex-end;
   border-radius: 4px 4px 0 0;
-  overflow: hidden;
-  max-width: 365px;
-  width: 100%;
-  height: 280px;
+  height: 160px;
   background: linear-gradient(
     121.57deg,
     ${({ theme }) => theme.colors.grey} 1.62%,
     #393939 81.02%
   );
   @media ${({ theme }) => theme.deviceSize.tablet} {
+    padding: 43px 0 0 0;
+    height: 240px;
+  }
+
+  @media ${({ theme }) => theme.deviceSize.laptop} {
     padding: 73px 0 0 0;
+    height: 280px;
   }
 `;
 
 const Img = styled.img`
   max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
 `;
 
@@ -51,10 +55,12 @@ const Description = styled.div`
   text-align: center;
   padding: 19px 5px;
   border-radius: 0 0 4px 4px;
-  max-width: 365px;
-  width: 100%;
   background: ${({ theme }) => theme.colors.darkGrey};
   color: ${({ theme }) => theme.colors.white};
+
+  @media ${({ theme }) => theme.deviceSize.tablet} {
+    padding: 24px 5px;
+  }
 `;
 
 const PlayerName = styled.h1`

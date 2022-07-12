@@ -56,7 +56,7 @@ export const TeamsPage = () => {
       localStorage.setItem("search", name);
     });
     return () => window.removeEventListener("unload", () => {});
-  }, [name]);
+  }, [reset, name]);
 
   useEffect(() => {
     dispatch(fetchTeams({ pageSize: pageSize?.value, page })).then((res) => {
@@ -66,14 +66,14 @@ export const TeamsPage = () => {
     return () => {
       dispatch(clearData());
     };
-  }, []);
+  }, [page, pageSize, dispatch]);
 
   useEffect(() => {
     countAll > 0 &&
       dispatch(
         fetchTeams({ name: debounceName, pageSize: pageSize?.value, page })
       );
-  }, [dispatch, debounceName, pageSize, page]);
+  }, [dispatch, debounceName, pageSize, page, countAll]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);

@@ -1,16 +1,12 @@
-import { baseFetch } from "./baseFetch";
+import { post } from "./baseFetch";
 import { User } from "./auth/AuthDto";
 
 const _postImage = async (
   user: User,
   formData: FormData | undefined
 ): Promise<string> => {
-  const response = await baseFetch({
-    url: "api/Image/SaveImage",
-    method: "POST",
-    headers: { Authorization: "Bearer " + user.token },
-    body: formData,
-  });
+  // @ts-ignore
+  const response = await post("api/Image/SaveImage", formData, user.token);
   return response.json();
 };
 

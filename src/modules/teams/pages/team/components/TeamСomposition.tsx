@@ -3,6 +3,7 @@ import { PlayerParams } from "../../../../../api/players/PlayersDto";
 import { getAge } from "../../../../../common/helpers/getAge";
 import { Link } from "react-router-dom";
 import { pathList } from "../../../../../routers/pathList";
+import noLogo from "../../../../../assets/images/no-logo.png";
 
 interface Props {
   players: Array<PlayerParams> | undefined;
@@ -33,7 +34,11 @@ export const TeamComposition = ({ players }: Props) => {
                     <CeilItem>
                       <ImgLink to={pathList.content.players + player.id}>
                         <Img
-                          src={`http://dev.trainee.dex-it.ru${player.avatarUrl}`}
+                          src={
+                            player.avatarUrl
+                              ? `http://dev.trainee.dex-it.ru${player.avatarUrl}`
+                              : noLogo
+                          }
                           alt={"Logo"}
                         />
                       </ImgLink>

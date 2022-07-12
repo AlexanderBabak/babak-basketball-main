@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { UseFormMethods } from "react-hook-form";
 import { ReactComponent as SearchImg } from "../../../assets/images/icons/search.svg";
-import { useEffect } from "react";
 
 export interface PropsInputSearch
   extends Partial<Pick<UseFormMethods, "register">> {

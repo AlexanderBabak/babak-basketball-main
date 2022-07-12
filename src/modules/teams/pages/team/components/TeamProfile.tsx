@@ -75,9 +75,11 @@ const LogoWrapper = styled.div`
 `;
 
 const Logo = styled.img`
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover;
+  max-width: 210px;
+  max-height: 210px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const TeamInfo = styled.div`

@@ -65,7 +65,7 @@ export const PlayersPage = () => {
       localStorage.setItem("search", name);
     });
     return () => window.removeEventListener("unload", () => {});
-  }, [name]);
+  }, [reset, name]);
 
   useEffect(() => {
     dispatch(fetchPlayers({ page, pageSize: pageSize?.value })).then((res) => {
@@ -76,7 +76,7 @@ export const PlayersPage = () => {
     return () => {
       dispatch(clearData());
     };
-  }, [dispatch]);
+  }, [dispatch, page, pageSize]);
 
   useEffect(() => {
     nameSelects && dispatch(fetchPlayersTeamIds(nameSelects));
@@ -87,7 +87,7 @@ export const PlayersPage = () => {
       dispatch(
         fetchPlayers({ name: debounceName, page, pageSize: pageSize?.value })
       );
-  }, [dispatch, debounceName, pageSize, page]);
+  }, [dispatch, debounceName, pageSize, page, countAll]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);

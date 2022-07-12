@@ -79,6 +79,7 @@ const ImgWrapper = styled.div`
   justify-content: center;
   align-items: flex-end;
   padding: 48px 118px;
+  overflow: hidden;
 
   @media ${({ theme }) => theme.deviceSize.laptop} {
     max-width: 587px;
@@ -88,12 +89,14 @@ const ImgWrapper = styled.div`
 `;
 
 const Img = styled.img`
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 163px;
+  max-height: 112px;
+  width: 100%;
+  object-fit: contain;
 
   @media ${({ theme }) => theme.deviceSize.laptop} {
-    width: 400px;
-    height: 320px;
+    max-width: 500px;
+    max-height: 400px;
   }
 `;
 

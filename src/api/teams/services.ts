@@ -1,4 +1,4 @@
-import { baseFetch } from "../baseFetch";
+import { get, post, remove, put } from "../baseFetch";
 import { TeamsResponse, Team, TeamParams } from "./TeamsDto";
 import { IdParams, ParamsGetElement } from "../appDto";
 import { CustomError } from "../../common/helpers/errorHelper";
@@ -21,31 +21,18 @@ const getTeams = async (
   if (name) {
     url = `${url}&Name=${name}`;
   }
-  const response = await baseFetch({
-    url: url,
-    method: "GET",
-    headers: { Authorization: "Bearer " + user.token },
-    body: undefined,
-  });
+
+  const response = await get(url, "", user.token);
   return response.json();
 };
 
 const getTeamId = async (user: User, { id }: IdParams): Promise<Team> => {
-  const response = await baseFetch({
-    url: `api/Team/Get?id=${id}`,
-    method: "GET",
-    headers: { Authorization: "Bearer " + user.token },
-  });
+  const response = await get(`api/Team/Get?id=${id}`, "", user.token);
   return response.json();
 };
 
 const deleteTeam = async (user: User, { id }: IdParams): Promise<Team> => {
-  const response = await baseFetch({
-    url: `api/Team/Delete?id=${id}`,
-    method: "DELETE",
-    headers: { Authorization: "Bearer " + user.token },
-  });
-
+  const response = await remove(`api/Team/Delete?id=${id}`, user.token);
   if (!response.ok) {
     switch (response.status) {
       case 500:
@@ -65,15 +52,12 @@ const deleteTeam = async (user: User, { id }: IdParams): Promise<Team> => {
 };
 
 const postTeam = async (user: User, params: TeamParams) => {
-  const response = await baseFetch({
-    url: "api/Team/Add",
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + user.token,
-    },
-    body: JSON.stringify(params),
-  });
+  const response = await post(
+    "api/Team/Add",
+    JSON.stringify(params),
+    user.token
+  );
+
   if (!response.ok) {
     switch (response.status) {
       case 409:
@@ -88,19 +72,16 @@ const postTeam = async (user: User, params: TeamParams) => {
         );
     }
   }
+
   return response.json();
 };
 
 const editTeam = async (user: User, params: TeamParams) => {
-  const response = await baseFetch({
-    url: "api/Team/Update",
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + user.token,
-    },
-    body: JSON.stringify(params),
-  });
+  const response = await put(
+    "api/Team/Update",
+    JSON.stringify(params),
+    user.token
+  );
   return response.json();
 };
 
