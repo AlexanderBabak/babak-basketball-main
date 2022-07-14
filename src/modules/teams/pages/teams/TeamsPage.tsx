@@ -73,7 +73,8 @@ export const TeamsPage = () => {
       dispatch(
         fetchTeams({ name: debounceName, pageSize: pageSize?.value, page })
       );
-  }, [dispatch, debounceName, pageSize, page, countAll]);
+    // eslint-disable-next-line
+  }, [dispatch, debounceName, pageSize, page]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);

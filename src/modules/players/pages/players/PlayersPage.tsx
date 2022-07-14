@@ -87,7 +87,8 @@ export const PlayersPage = () => {
       dispatch(
         fetchPlayers({ name: debounceName, page, pageSize: pageSize?.value })
       );
-  }, [dispatch, debounceName, pageSize, page, countAll]);
+    // eslint-disable-next-line
+  }, [dispatch, debounceName, pageSize, page]);
 
   const onPageChange = (selectedItem: { selected: number }) => {
     setPage(selectedItem.selected + 1);
