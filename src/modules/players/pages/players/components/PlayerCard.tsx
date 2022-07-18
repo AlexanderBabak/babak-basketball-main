@@ -4,23 +4,25 @@ import noLogo from "../../../../../assets/images/no-logo.png";
 
 type Props = Pick<PlayerParams, "name" | "number" | "team" | "avatarUrl">;
 
-export const PlayerCard = ({ name, number, team, avatarUrl }: Props) => (
-  <>
-    <ImgContainer>
-      <Img
-        src={avatarUrl ? `http://dev.trainee.dex-it.ru${avatarUrl}` : noLogo}
-        alt="photo"
-      />
-    </ImgContainer>
-    <Description>
-      <PlayerName>
-        {name}
-        <PlayerNumber>&nbsp;#{number}</PlayerNumber>
-      </PlayerName>
-      <PlayerTeam>{team}</PlayerTeam>
-    </Description>
-  </>
-);
+export const PlayerCard = ({ name, number, team, avatarUrl }: Props) => {
+  return (
+    <>
+      <ImgContainer>
+        <Img
+          src={avatarUrl ? `http://dev.trainee.dex-it.ru${avatarUrl}` : noLogo}
+          alt="photo"
+        />
+      </ImgContainer>
+      <Description>
+        <PlayerName>
+          {name}
+          <PlayerNumber>&nbsp;#{number}</PlayerNumber>
+        </PlayerName>
+        <PlayerTeam>{team}</PlayerTeam>
+      </Description>
+    </>
+  );
+};
 
 const ImgContainer = styled.div`
   display: flex;

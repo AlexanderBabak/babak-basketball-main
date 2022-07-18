@@ -15,7 +15,34 @@ const request = async (url: string, data: any, token: string | undefined) => {
     },
   });
 
-  return response;
+  if (response.ok) {
+    if (response.headers.get("Content-Length") === "0") {
+      return true;
+    }
+    const typeResponse = response.headers.get("Content-type");
+    let result;
+    if (typeResponse === "aplication/text") {
+      result = await response.text();
+      return result;
+    }
+    result = await response.json();
+    return result;
+  } else {
+    if (response.status === 401 || response.status === 403) {
+      localStorage.removeItem("user");
+      throw new Error("Unauthorized user");
+    }
+    if (response.status === 400) {
+      throw new Error("Enter correct data!");
+    }
+    if (response.status === 409) {
+      throw new Error("Already exists");
+    }
+    if (response.status === 500) {
+      throw new Error("Unable to delete team, must delete players!");
+      // eslint-disable-next-line no-throw-literal
+    } else throw { status: response.status };
+  }
 };
 
 export const get = (url: string, body?: string | FormData, token?: string) =>

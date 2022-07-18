@@ -18,12 +18,13 @@ import { pathList } from "../../../../routers/pathList";
 import { Spinner } from "../../../../common/components/Spiner";
 import { OptionTypeBase } from "react-select";
 import { LoadState } from "../../../../core/redux/loadState";
-import { InitialPlayersPageParams } from "../../../../api/players/services";
+import { InitialPlayersPageParams } from "../../../../api/players/playersServices";
 import { EmptyContent } from "../../../../common/components/EmptyContent";
 import emptyPlayerImg from "../../../../assets/images/empty-player-bg.png";
 import { useDebounceValue } from "../../../../common/hooks/useDebounceValue";
-import { InitialTeamsPageParams } from "../../../../api/teams/services";
+import { InitialTeamsPageParams } from "../../../../api/teams/teamsServices";
 import { TeamParams } from "../../../../api/teams/TeamsDto";
+import { Notification } from "../../../../common/components/Notification";
 
 const DEFAULT_FIELD_VALUES = {
   name: "",
@@ -42,7 +43,7 @@ interface FormFields {
 export const PlayersPage = () => {
   const dispatch = useAppDispatch();
   const [page, setPage] = useState<number>(InitialPlayersPageParams.page);
-  const { loading, data, count, size, teamsFilter } =
+  const { loading, data, count, size, teamsFilter, errorPlayers } =
     useSelector(playersSelector);
   const { register, control, reset, watch } = useForm<FormFields>({
     defaultValues: DEFAULT_FIELD_VALUES,
@@ -52,6 +53,7 @@ export const PlayersPage = () => {
     "name",
     "nameSelects",
   ]);
+
   const [countAll, setCount] = useState(0);
   const debounceName = useDebounceValue<string>(name);
 
@@ -125,41 +127,44 @@ export const PlayersPage = () => {
   const loadSuggestions = debounce(handleInputChange, 750);
 
   return (
-    <ContentLayout
-      onPageChange={onPageChange}
-      register={register}
-      selectOptions={teamsOptions}
-      handleInputChange={loadSuggestions}
-      placeholder="Search..."
-      nameSearch="name"
-      nameSearchSelect="nameSelects"
-      control={control}
-      addItemPath={pathList.content.addPlayer}
-      pageCount={pageCount}
-      count={countAll}
-    >
-      {loading === LoadState.pending ? (
-        <Spinner />
-      ) : data.length ? (
-        <CardWrapper>
-          {data &&
-            data.map(({ name, id, number, team, avatarUrl }: any) => {
-              return (
-                <PlayerLink to={pathList.content.players + id} key={id}>
-                  <PlayerCard
-                    name={name}
-                    number={number}
-                    team={team}
-                    avatarUrl={avatarUrl}
-                  />
-                </PlayerLink>
-              );
-            })}
-        </CardWrapper>
-      ) : (
-        <EmptyContent label={"player"} emptyImg={emptyPlayerImg} />
-      )}
-    </ContentLayout>
+    <>
+      <Notification error={errorPlayers} />
+      <ContentLayout
+        onPageChange={onPageChange}
+        register={register}
+        selectOptions={teamsOptions}
+        handleInputChange={loadSuggestions}
+        placeholder="Search..."
+        nameSearch="name"
+        nameSearchSelect="nameSelects"
+        control={control}
+        addItemPath={pathList.content.addPlayer}
+        pageCount={pageCount}
+        count={countAll}
+      >
+        {loading === LoadState.pending ? (
+          <Spinner />
+        ) : data.length ? (
+          <CardWrapper>
+            {data &&
+              data.map(({ name, id, number, team, avatarUrl }: any) => {
+                return (
+                  <PlayerLink to={pathList.content.players + id} key={id}>
+                    <PlayerCard
+                      name={name}
+                      number={number}
+                      team={team}
+                      avatarUrl={avatarUrl}
+                    />
+                  </PlayerLink>
+                );
+              })}
+          </CardWrapper>
+        ) : (
+          <EmptyContent label={"player"} emptyImg={emptyPlayerImg} />
+        )}
+      </ContentLayout>
+    </>
   );
 };
 

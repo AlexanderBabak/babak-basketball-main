@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { RootState } from "../../core/redux/store";
-import { playerServices } from "../../api/players/services";
+import { playerServices } from "../../api/players/playersServices";
 import { getUploadedImage } from "../../api/postImg";
 import {
   Player,
@@ -8,192 +7,83 @@ import {
   PlayersResponse,
 } from "../../api/players/PlayersDto";
 import { ParamsGetElement } from "../../api/appDto";
-import { CustomError } from "../../common/helpers/errorHelper";
-import { notification } from "../../common/helpers/notification";
-import { teamsServices } from "../../api/teams/services";
+import { teamsServices } from "../../api/teams/teamsServices";
 import { Team } from "../../api/teams/TeamsDto";
 
 export const fetchPlayers = createAsyncThunk<PlayersResponse, ParamsGetElement>(
   "players/fetchPlayersFilter",
-  async (params, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-      return await playerServices.getPlayers(auth.user, params);
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
-    }
+  async (params) => {
+    return await playerServices.getPlayers(params);
   }
 );
 
 export const fetchPositions = createAsyncThunk(
   "players/fetchPositions",
-  async (_, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-      return await playerServices.getPositions(auth.user);
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
-    }
+  async () => {
+    return await playerServices.getPositions();
   }
 );
 
 export const fetchAddPlayer = createAsyncThunk<Player, PlayerParams>(
   "players/fetchAddPlayer",
 
-  async (params, { rejectWithValue, getState }) => {
+  async (params) => {
     const { imageFile, callback, ...restParams } = params;
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-
-      const avatarUrl = imageFile
-        ? await getUploadedImage(auth.user, imageFile)
-        : "";
-
-      const response = await playerServices.postPlayer(auth.user, {
-        avatarUrl,
-        ...restParams,
-      });
-      if (response) {
-        callback && callback();
-        return response;
-      }
-    } catch (err) {
-      if (err instanceof CustomError) {
-        notification("error", err.text, { toastId: err.code });
-      } else {
-        notification("error", "Неизвестная ошибка!");
-      }
-      return rejectWithValue("Register Error: " + err);
+    const avatarUrl = imageFile ? await getUploadedImage(imageFile) : "";
+    const response = await playerServices.postPlayer({
+      avatarUrl,
+      ...restParams,
+    });
+    if (response) {
+      callback && callback();
+      return response;
     }
   }
 );
 
 export const fetchPlayerId = createAsyncThunk<Player, { id: string }>(
   "players/fetchPlayerId",
-  async (params, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-      return await playerServices.getPlayerId(auth.user, params);
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
-    }
+  async (params) => {
+    return await playerServices.getPlayerId(params);
   }
 );
 
 export const fetchDeletePlayer = createAsyncThunk<Player, { id: string }>(
   "players/fetchDeletePlayer",
-  async (params, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-      return await playerServices.deletePlayer(auth.user, params);
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
-    }
+  async (params) => {
+    return await playerServices.deletePlayer(params);
   }
 );
 
 export const fetchPlayersTeamIds = createAsyncThunk<
   PlayersResponse,
   Array<{ value: string }>
->(
-  "players/fetchPlayersTeamIds",
-  async (TeamIds, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-      return await playerServices.getPlayerTeamIds(auth.user, TeamIds);
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
-    }
-  }
-);
+>("players/fetchPlayersTeamIds", async (TeamIds) => {
+  return await playerServices.getPlayerTeamIds(TeamIds);
+});
 
 export const fetchEditPlayer = createAsyncThunk<Player, PlayerParams>(
   "players/fetchEditPlayer",
-  async (params, { rejectWithValue, getState }) => {
+  async (params) => {
     const { imageUrl, imageFile, callback, ...restParams } = params;
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
 
-      const avatarUrl = imageFile
-        ? await getUploadedImage(auth.user, imageFile)
-        : imageUrl;
+    const avatarUrl = imageFile ? await getUploadedImage(imageFile) : imageUrl;
 
-      const response = await playerServices.editPlayer(auth.user, {
-        avatarUrl,
-        ...restParams,
-      });
-      if (response) {
-        callback && callback();
-        return response;
-      }
-    } catch (err) {
-      if (err instanceof CustomError) {
-        notification("error", err.text, { toastId: err.code });
-      } else {
-        notification("error", "Неизвестная ошибка!");
-      }
-      return rejectWithValue("Register Error: " + err);
+    const response = await playerServices.editPlayer({
+      avatarUrl,
+      ...restParams,
+    });
+    if (response) {
+      callback && callback();
+      return response;
     }
   }
 );
 
 export const fetchTeamsFilter = createAsyncThunk<Team[], ParamsGetElement>(
   "players/fetchTeamsFilter",
-  async (params, { rejectWithValue, getState }) => {
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
-      const response = await teamsServices.getTeams(auth.user, params);
-      return response.data;
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
-    }
+  async (params) => {
+    const response = await teamsServices.getTeams(params);
+    return response.data;
   }
 );

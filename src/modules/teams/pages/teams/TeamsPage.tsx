@@ -12,12 +12,13 @@ import { pathList } from "../../../../routers/pathList";
 import { Spinner } from "../../../../common/components/Spiner";
 import { CardWrapper } from "../../../../assets/styles/CardWrapper";
 import { OptionTypeBase } from "react-select";
-import { InitialTeamsPageParams } from "../../../../api/teams/services";
+import { InitialTeamsPageParams } from "../../../../api/teams/teamsServices";
 import { EmptyContent } from "../../../../common/components/EmptyContent";
 import { LoadState } from "../../../../core/redux/loadState";
 import emptyTeamImg from "../../../../assets/images/empty-teams-bg.png";
 import { useDebounceValue } from "../../../../common/hooks/useDebounceValue";
 import { TeamParams } from "../../../../api/teams/TeamsDto";
+import { Notification } from "../../../../common/components/Notification";
 
 const DEFAULT_FIELD_VALUES = {
   name: "",
@@ -35,7 +36,8 @@ interface FormFields {
 
 export const TeamsPage = () => {
   const dispatch = useAppDispatch();
-  const { dataTeams, loading, count, size } = useSelector(teamsSelector);
+  const { dataTeams, loading, count, size, errorTeams } =
+    useSelector(teamsSelector);
   const [page, setPage] = useState<number>(InitialTeamsPageParams.page);
   const { register, reset, control, watch } = useForm<FormFields>({
     defaultValues: DEFAULT_FIELD_VALUES,
@@ -88,39 +90,42 @@ export const TeamsPage = () => {
   }, [count, size]);
 
   return (
-    <ContentLayout
-      onPageChange={onPageChange}
-      register={register}
-      placeholder="Search..."
-      nameSearch="name"
-      control={control}
-      addItemPath={pathList.content.addTeam}
-      pageCount={pageCount}
-      count={countAll}
-    >
-      {loading === LoadState.pending ? (
-        <Spinner />
-      ) : dataTeams.length ? (
-        <CardWrapper>
-          {dataTeams &&
-            dataTeams.map(
-              ({ name, foundationYear, id, imageUrl }: TeamParams) => {
-                return (
-                  <TeamLink to={pathList.content.teams + id} key={id}>
-                    <TeamCard
-                      name={name}
-                      foundationYear={foundationYear}
-                      imageUrl={imageUrl}
-                    />
-                  </TeamLink>
-                );
-              }
-            )}
-        </CardWrapper>
-      ) : (
-        <EmptyContent label={"team"} emptyImg={emptyTeamImg} />
-      )}
-    </ContentLayout>
+    <>
+      <Notification error={errorTeams} />
+      <ContentLayout
+        onPageChange={onPageChange}
+        register={register}
+        placeholder="Search..."
+        nameSearch="name"
+        control={control}
+        addItemPath={pathList.content.addTeam}
+        pageCount={pageCount}
+        count={countAll}
+      >
+        {loading === LoadState.pending ? (
+          <Spinner />
+        ) : dataTeams.length ? (
+          <CardWrapper>
+            {dataTeams &&
+              dataTeams.map(
+                ({ name, foundationYear, id, imageUrl }: TeamParams) => {
+                  return (
+                    <TeamLink to={pathList.content.teams + id} key={id}>
+                      <TeamCard
+                        name={name}
+                        foundationYear={foundationYear}
+                        imageUrl={imageUrl}
+                      />
+                    </TeamLink>
+                  );
+                }
+              )}
+          </CardWrapper>
+        ) : (
+          <EmptyContent label={"team"} emptyImg={emptyTeamImg} />
+        )}
+      </ContentLayout>
+    </>
   );
 };
 

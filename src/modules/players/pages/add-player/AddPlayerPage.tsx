@@ -20,7 +20,7 @@ export const AddPlayerPage = () => {
   const dispatch = useAppDispatch();
   const { pathname } = useLocation();
   const { goBack } = useHistory();
-  const { teamsFilter, loadingTeamsFilter, loading } =
+  const { teamsFilter, loadingTeamsFilter, loading, errorPlayers } =
     useSelector(playersSelector);
   const { optionsPositions } = usePlayerPositions();
   const { watch, register, handleSubmit, control } = useForm<PlayerFormFields>({
@@ -92,6 +92,7 @@ export const AddPlayerPage = () => {
           teamsOptions={teamsOptions}
           loading={loadingTeamsFilter}
           goBackHandler={goBackHandler}
+          error={errorPlayers}
         />
       </LoadingBackdrop>
     </AddPlayerWrapper>

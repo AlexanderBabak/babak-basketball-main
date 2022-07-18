@@ -25,7 +25,7 @@ export const EditPlayerPage = () => {
   const { pathname } = useLocation();
   const { goBack } = useHistory();
   const { id } = useParams<{ id: string }>();
-  const { player, teamsFilter, loadingTeamsFilter, loading } =
+  const { player, teamsFilter, loadingTeamsFilter, loading, errorPlayers } =
     useSelector(playersSelector);
   const { optionsPositions } = usePlayerPositions();
   const { watch, register, handleSubmit, control, setValue } =
@@ -131,6 +131,7 @@ export const EditPlayerPage = () => {
           handleInputChange={loadSuggestions}
           loading={loadingTeamsFilter}
           goBackHandler={goBackHandler}
+          error={errorPlayers}
         />
       </LoadingBackdrop>
     </EditPlayerWrapper>

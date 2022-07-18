@@ -3,12 +3,15 @@ import { FieldErrors, UseFormMethods } from "react-hook-form";
 import { Input } from "../../../common/components/ui/Input";
 import { Button } from "../../../common/components/ui/Button";
 import { InputFile } from "../../../common/components/ui/InputFile";
+import { Notification } from "../../../common/components/Notification";
+import noLogo from "../../../assets/images/no-logo.png";
 
 interface Props extends Partial<Pick<UseFormMethods, "register">> {
   onSubmit: () => void;
   teamLogo?: string;
   errors: FieldErrors;
   goBackHandler: () => void;
+  error?: string;
 }
 
 export const TeamForm = ({
@@ -17,13 +20,22 @@ export const TeamForm = ({
   teamLogo,
   errors,
   goBackHandler,
+  error,
 }: Props) => {
+  const noImage = "http://dev.trainee.dex-it.ru";
   return (
     <Form onSubmit={onSubmit}>
+      <Notification error={error} />
       <AddImg>
         <InputFile
           register={register}
-          image={teamLogo && <TeamImg src={teamLogo} />}
+          image={
+            teamLogo !== noImage ? (
+              <TeamImg src={teamLogo} />
+            ) : (
+              <TeamImg src={noLogo} />
+            )
+          }
         />
       </AddImg>
       <WrapperItem>

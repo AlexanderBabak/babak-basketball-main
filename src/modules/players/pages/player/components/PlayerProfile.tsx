@@ -5,7 +5,7 @@ interface Props {
   avatarUrl?: string;
   name?: string;
   position?: string;
-  team?: number;
+  teamName?: string;
   height?: number;
   weight?: number;
   age?: number;
@@ -16,7 +16,7 @@ export const PlayerProfile = ({
   avatarUrl,
   name,
   position,
-  team,
+  teamName,
   height,
   weight,
   age,
@@ -27,7 +27,7 @@ export const PlayerProfile = ({
       label: "Position",
       value: position?.replace(/([A-Z][a-z]+)/g, "$1 ").trim(),
     },
-    { label: "Team", value: team },
+    { label: "Team", value: teamName },
     { label: "Height", value: height },
     { label: "Weight", value: weight },
     { label: "Age", value: age },

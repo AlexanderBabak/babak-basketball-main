@@ -10,6 +10,7 @@ export interface PlayerParams {
   imageFile?: File;
   id?: string | number;
   imageUrl?: string;
+  teamName?: string;
   callback?: () => void;
 }
 
@@ -30,4 +31,5 @@ export interface Player {
   height: number;
   weight: number;
   avatarUrl: string;
+  teamName: string;
 }

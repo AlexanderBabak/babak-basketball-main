@@ -18,7 +18,7 @@ export const EditTeamPage = () => {
   const { pathname } = useLocation();
   const { goBack } = useHistory();
   const { id } = useParams<{ id: string }>();
-  const { team, loading } = useSelector(teamsSelector);
+  const { team, loading, errorTeams } = useSelector(teamsSelector);
   const { watch, register, handleSubmit, setValue, errors } = useForm({
     mode: "onBlur",
   });
@@ -80,6 +80,7 @@ export const EditTeamPage = () => {
               : teamLogo
           }
           goBackHandler={goBackHandler}
+          error={errorTeams}
         />
       </LoadingBackdrop>
     </EditTeamWrapper>

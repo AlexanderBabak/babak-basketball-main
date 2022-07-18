@@ -14,7 +14,7 @@ import { useImageUpload } from "../../../../common/hooks/useImageUpload";
 
 export const AddTeamPage = () => {
   const { pathname } = useLocation();
-  const { loading } = useSelector(teamsSelector);
+  const { loading, errorTeams } = useSelector(teamsSelector);
   const { goBack } = useHistory();
   const dispatch = useAppDispatch();
   const { watch, register, handleSubmit, errors } = useForm({
@@ -58,6 +58,7 @@ export const AddTeamPage = () => {
           teamLogo={teamLogo}
           errors={errors}
           goBackHandler={goBackHandler}
+          error={errorTeams}
         />
       </LoadingBackdrop>
     </AddTeamWrapper>

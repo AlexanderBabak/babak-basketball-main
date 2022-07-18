@@ -32,6 +32,7 @@ export const ContentFooter = ({ control, onPageChange, pageCount }: Props) => {
 const ContentWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
 `;
 
 const SelectWrapper = styled.div`

@@ -6,12 +6,12 @@ const _postImage = async (
   formData: FormData | undefined
 ): Promise<string> => {
   // @ts-ignore
-  const response = await post("api/Image/SaveImage", formData, user.token);
-  return response.json();
+  return post("api/Image/SaveImage", formData, user.token);
 };
 
-export const getUploadedImage = async (user: User, imageFile: File) => {
+export const getUploadedImage = async (imageFile: File) => {
   const formData = new FormData();
   formData.append("file", imageFile);
+  const user = JSON.parse(`${localStorage.getItem("user")}`);
   return await _postImage(user, formData);
 };

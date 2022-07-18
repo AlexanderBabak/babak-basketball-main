@@ -42,7 +42,7 @@ export const PlayerViewPage = () => {
           name={player?.name}
           number={player?.number}
           avatarUrl={player?.avatarUrl}
-          team={player?.team}
+          teamName={player?.teamName}
           position={player?.position}
           weight={player?.weight}
           height={player?.height}

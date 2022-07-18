@@ -9,6 +9,8 @@ import {
   SelectProps,
 } from "../../../common/components/ui/Select/Select";
 import { OptionTypeBase } from "react-select";
+import { Notification } from "../../../common/components/Notification";
+import noLogo from "../../../assets/images/no-logo.png";
 
 export interface PlayerFormFields {
   name: string;
@@ -29,6 +31,7 @@ interface Props
   optionsPositions?: Array<{ value: string; label: string }>;
   teamsOptions?: SelectOptions;
   goBackHandler: () => void;
+  error?: string;
 }
 
 export const PlayerForm = ({
@@ -41,13 +44,22 @@ export const PlayerForm = ({
   handleInputChange,
   loading,
   goBackHandler,
+  error,
 }: Props) => {
+  const noImage = "http://dev.trainee.dex-it.ru";
   return (
     <Form onSubmit={onSubmit}>
+      <Notification error={error} />
       <AddImgWrapper>
         <InputFile
           register={register}
-          image={playerImage && <PlayerImg src={playerImage} />}
+          image={
+            playerImage !== noImage ? (
+              <PlayerImg src={playerImage} />
+            ) : (
+              <PlayerImg src={noLogo} />
+            )
+          }
         />
       </AddImgWrapper>
       <WrapperItem>

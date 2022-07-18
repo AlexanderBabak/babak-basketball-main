@@ -1,105 +1,50 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { teamsServices } from "../../api/teams/services";
-import { RootState } from "../../core/redux/store";
+import { teamsServices } from "../../api/teams/teamsServices";
 import { TeamsResponse, Team, TeamParams } from "../../api/teams/TeamsDto";
 import { ParamsGetElement } from "../../api/appDto";
-import { CustomError } from "../../common/helpers/errorHelper";
-import { notification } from "../../common/helpers/notification";
 import { getUploadedImage } from "../../api/postImg";
 import { PlayersResponse } from "../../api/players/PlayersDto";
-import { playerServices } from "../../api/players/services";
+import { playerServices } from "../../api/players/playersServices";
 
 export const fetchTeams = createAsyncThunk<
   TeamsResponse,
   ParamsGetElement,
   { rejectValue: string; getState: () => void }
->("teams/fetchTeams", async (params, { rejectWithValue, getState }) => {
-  try {
-    const { auth } = getState() as RootState;
-    if (!auth.user) {
-      throw new Error("Invalid operation User is undefined");
-    }
-    return await teamsServices.getTeams(auth.user, params);
-  } catch (err) {
-    if (err.message) {
-      return rejectWithValue(err.message);
-    } else {
-      return rejectWithValue(err);
-    }
-  }
+>("teams/fetchTeams", async (params) => {
+  return await teamsServices.getTeams(params);
 });
 
 export const fetchTeamId = createAsyncThunk<
   Team,
   { id: string },
   { rejectValue: string; getState: () => void }
->("teams/fetchTeamId", async (params, { rejectWithValue, getState }) => {
-  try {
-    const { auth } = getState() as RootState;
-    if (!auth.user) {
-      throw new Error("Invalid operation User is undefined");
-    }
-    return await teamsServices.getTeamId(auth.user, params);
-  } catch (err) {
-    if (err.message) {
-      return rejectWithValue(err.message);
-    } else {
-      return rejectWithValue(err);
-    }
-  }
+>("teams/fetchTeamId", async (params) => {
+  return await teamsServices.getTeamId(params);
 });
 
 export const fetchDeleteTeam = createAsyncThunk<
   Team,
   { id: string },
   { rejectValue: string; getState: () => void }
->("teams/fetchDeleteTeam", async (params, { rejectWithValue, getState }) => {
-  try {
-    const { auth } = getState() as RootState;
-    if (!auth.user) {
-      throw new Error("Invalid operation User is undefined");
-    }
-    return await teamsServices.deleteTeam(auth.user, params);
-  } catch (err) {
-    if (err instanceof CustomError) {
-      notification("error", err.text, { toastId: err.code });
-    } else {
-      notification("error", "Неизвестная ошибка!");
-    }
-    return rejectWithValue("Register Error: " + err);
-  }
+>("teams/fetchDeleteTeam", async (params) => {
+  return await teamsServices.deleteTeam(params);
 });
 
 export const fetchAddTeam = createAsyncThunk<Team, TeamParams>(
   "teams/fetchAddTeam",
 
-  async (params, { rejectWithValue, getState }) => {
+  async (params) => {
     const { imageFile, callback, ...restParams } = params;
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
 
-      const imageUrl = imageFile
-        ? await getUploadedImage(auth.user, imageFile)
-        : "";
+    const imageUrl = imageFile ? await getUploadedImage(imageFile) : "";
 
-      const response = await teamsServices.postTeam(auth.user, {
-        imageUrl,
-        ...restParams,
-      });
-      if (response) {
-        callback && callback();
-        return response;
-      }
-    } catch (err) {
-      if (err instanceof CustomError) {
-        notification("error", err.text, { toastId: err.code });
-      } else {
-        notification("error", "Неизвестная ошибка!");
-      }
-      return rejectWithValue("Register Error: " + err);
+    const response = await teamsServices.postTeam({
+      imageUrl,
+      ...restParams,
+    });
+    if (response) {
+      callback && callback();
+      return response;
     }
   }
 );
@@ -111,31 +56,19 @@ export const fetchEditTeam = createAsyncThunk<
 >(
   "teams/fetchEditTeam",
 
-  async (params, { rejectWithValue, getState }) => {
+  async (params) => {
     const { imageFile, imageUrlLogo, callback, ...restParams } = params;
-    try {
-      const { auth } = getState() as RootState;
-      if (!auth.user) {
-        throw new Error("Invalid operation User is undefined");
-      }
 
-      const imageUrl = imageFile
-        ? await getUploadedImage(auth.user, imageFile)
-        : imageUrlLogo;
-      const response = await teamsServices.editTeam(auth.user, {
-        imageUrl,
-        ...restParams,
-      });
-      if (response) {
-        callback && callback();
-        return response;
-      }
-    } catch (err) {
-      if (err.message) {
-        return rejectWithValue(err.message);
-      } else {
-        return rejectWithValue(err);
-      }
+    const imageUrl = imageFile
+      ? await getUploadedImage(imageFile)
+      : imageUrlLogo;
+    const response = await teamsServices.editTeam({
+      imageUrl,
+      ...restParams,
+    });
+    if (response) {
+      callback && callback();
+      return response;
     }
   }
 );
@@ -143,18 +76,6 @@ export const fetchEditTeam = createAsyncThunk<
 export const fetchTeamPlayers = createAsyncThunk<
   PlayersResponse,
   Array<{ value: string }>
->("teams/fetchTeamPlayers", async (TeamIds, { rejectWithValue, getState }) => {
-  try {
-    const { auth } = getState() as RootState;
-    if (!auth.user) {
-      throw new Error("Invalid operation User is undefined");
-    }
-    return await playerServices.getPlayerTeamIds(auth.user, TeamIds);
-  } catch (err) {
-    if (err.message) {
-      return rejectWithValue(err.message);
-    } else {
-      return rejectWithValue(err);
-    }
-  }
+>("teams/fetchTeamPlayers", async (TeamIds) => {
+  return await playerServices.getPlayerTeamIds(TeamIds);
 });

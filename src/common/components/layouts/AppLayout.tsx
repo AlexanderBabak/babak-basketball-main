@@ -22,7 +22,9 @@ export const AppLayout: FC = ({ children }) => {
           onToggleSidebar={handleToggleSidebar}
         />
         {toggleSidebar && <BackDrop onClick={handleToggleSidebar} />}
-        <Content>{children}</Content>
+        <ContentInner>
+          <Content>{children}</Content>
+        </ContentInner>
       </ContentWrapper>
     </Layout>
   );
@@ -32,6 +34,7 @@ const Layout = styled.div`
   background: ${({ theme }) => theme.colors.lightestGrey1};
   height: 100vh;
   position: relative;
+  overflow-y: auto;
 `;
 
 const ContentWrapper = styled.div`
@@ -39,13 +42,18 @@ const ContentWrapper = styled.div`
   flex-wrap: nowrap;
 `;
 
+const ContentInner = styled.div`
+  width: 100%;
+  margin: 0 auto;
+  max-width: 1400px;
+`;
+
 const Content = styled.div`
   padding: 16px 0;
-  width: 100%;
   height: calc(100vh - 62px);
-  overflow-y: auto;
 
   @media ${({ theme }) => theme.deviceSize.tablet} {
+    margin-left: 140px;
     padding: 32px 80px;
     height: calc(100vh - 80px);
   } ;
