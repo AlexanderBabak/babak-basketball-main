@@ -31,7 +31,7 @@ export const ContentHeader = ({
 
   return (
     <Wrapper>
-      {true ? (
+      {count > 0 ? (
         <FilterContainer>
           <InputSearch
             register={register}
