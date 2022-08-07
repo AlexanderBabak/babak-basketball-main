@@ -1,6 +1,6 @@
 # Front-end проект `«Баскетбольная лига»`
 
-Разработка административного интерфейса для приложения баскетбольной лиги BIG3. Автор [Александр Бабак](https://bbkshow.github.io/). Сайт проекта доступен по ссылке [babak-basketball.vercel.app](https://babak-basketball.vercel.app/)
+Разработка административного интерфейса для приложения баскетбольной лиги BIG3. Автор [Александр Бабак](https://portfolio-bbkshow.vercel.app/). Сайт проекта доступен по ссылке [babak-basketball.vercel.app](https://babak-basketball.vercel.app/)
 
 ```
 Стек технологий:
