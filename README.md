@@ -23,7 +23,7 @@
 
 > список команд и игроков лиги с поиском, сортировкой, пагинацией и настройкой количества отображаемых элементов
 
-![список команд](https://i.ibb.co/h84gHYL/card-teams.jpg)
+![список команд](https://i.ibb.co/vQV9pL5/basketteam.jpg)
 
 ![список игроков](https://i.ibb.co/kQp9GHw/card-players.jpg)
 
