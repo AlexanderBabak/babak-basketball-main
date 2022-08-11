@@ -1,6 +1,6 @@
 # Front-end проект `«Баскетбольная лига»`
 
-Разработка административного интерфейса для приложения баскетбольной лиги BIG3. Автор [Александр Бабак](https://portfolio-bbkshow.vercel.app/). Сайт проекта доступен по ссылке [react-basketball.herokuapp.com](http://react-basketball.herokuapp.com/)
+Разработка административного интерфейса для приложения баскетбольной лиги BIG3. Автор [Александр Бабак](https://alexbabak.vercel.app/). Сайт проекта доступен по ссылке [react-basketball.herokuapp.com](http://react-basketball.herokuapp.com/)
 
 Для быстрого доступа в приложение с заполненными данными введите login: __testbbk__ и password: __1234567__
 
