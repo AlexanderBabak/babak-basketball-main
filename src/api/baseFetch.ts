@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.REACT_APP_BASE_API_URL;
+export const BASE_URL = "http://dev.trainee.dex-it.ru/";
 
 const request = async (url: string, data: any, token: string | undefined) => {
   const headersToken = token ? { Authorization: `Bearer ${token}` } : {};
